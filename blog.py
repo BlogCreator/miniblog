@@ -58,6 +58,15 @@ def get_recent_article(limit=100):
     wrap_article_result(result)
     return str({"success":"true","result":result})
 
+@bobo.query('/interface/get_cls')
+def get_cls():
+    meta = db.table(name='meta').all()
+    try:
+        classes = meta[0]['cls']
+        return str({"success":"true","result":classes})
+    except Exception as e:
+        return '{"success":"false","msg":"you have not create any class"}'
+
 @bobo.query('/interface/create_cls', check=authentication)
 def create_cls(cls):
     '''
@@ -95,16 +104,7 @@ def pulish_article(file=None,title=None,desc=None,cls=None):
         with open(UPLOAD + file.filename,'wb') as new_file:
             new_file.write(file.file.read())
 
-    # date = {
-    #     "year":datetime.datetime.now().year,
-    #     "month":datetime.datetime.now().month,
-    #     "day":datetime.datetime.now().day,
-    #     "hour":datetime.datetime.now().hour,
-    #     "minute":datetime.datetime.now().minute,
-    #     "second":datetime.datetime.now().second
-    # }
     date =  datetime.datetime.now().isoformat()
-
     query = tinydb.Query()
     if hasattr(file, 'filename'):
         result = db.search((query.title==title) | (query.file==file.filename))
