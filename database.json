@@ -1,1 +1,1 @@
-{"meta": {"1": {"key": "meta", "cls": ["other", "test"]}}, "_default": {"1": {"date": "2017-11-06T16:38:13.172953", "cls": "other", "desc": "...", "file": "hmcl.json", "title": "test"}, "2": {"date": "2017-11-06T16:38:21.822765", "cls": "other", "desc": "...", "file": "mc.sh", "title": "test2"}}}
+{"meta": {"1": {"cls": ["other"], "key": "meta"}}, "_default": {"1": {"date": "2017-11-06T21:58:51.487807", "cls": "other", "desc": "desc", "title": "test", "file": "mc.sh"}}}

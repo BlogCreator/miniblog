@@ -1,14 +1,11 @@
+#! /usr/bin/python3
 import bobo
 import tinydb
 import datetime
 import os
 import sys
-
-DB_PATH = '/media/syk/work/work/python/miniblog/database.json'
-STATIC = '/media/syk/work/work/python/miniblog/static/'
-UPLOAD = '/media/syk/work/work/python/miniblog/static/upload/'
-db = tinydb.TinyDB(DB_PATH)
-ADMIN_SESSIONID = set()
+import json
+from setting import *
 
 def authentication(instance,request, decorated):
     if request.cookies['optimizelyEndUserId'] not in ADMIN_SESSIONID:
@@ -49,21 +46,21 @@ def get_article(title=None,cls=None):
 
     wrap_article_result(result)
     resp = {"success":"true","result":result}
-    return str(resp)
+    return json.dumps(resp)
 
 @bobo.query('/interface/get_recent_article')
 def get_recent_article(limit=100):
     result = db.all()[:int(limit)]
     result.sort(key=lambda k:k['date'],reverse=True)
     wrap_article_result(result)
-    return str({"success":"true","result":result})
+    return json.dumps({"success":"true","result":result})
 
 @bobo.query('/interface/get_cls')
 def get_cls():
     meta = db.table(name='meta').all()
     try:
         classes = meta[0]['cls']
-        return str({"success":"true","result":classes})
+        return json.dumps({"success":"true","result":classes})
     except Exception as e:
         return '{"success":"false","msg":"you have not create any class"}'
 
@@ -115,7 +112,7 @@ def pulish_article(file=None,title=None,desc=None,cls=None):
             db.insert({
                 "file":file.filename if hasattr(file,'filename') else None,
                 "title":title if title else 'untitled',
-                "desc":desc if desc else '...',
+                "desc":desc if desc else '...h',
                 "date":date,
                 "cls":cls if cls else 'other'
             })
