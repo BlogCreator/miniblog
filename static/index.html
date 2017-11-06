@@ -25,7 +25,7 @@
     </head>
     <body>
         <h1>接口测试</h1>
-        <h2>文章发布测试</h2>
+        <h2>文章发布</h2>
         <form action='/interface/publish_article' method='post' enctype="multipart/form-data">
             <label>标题</label>
             <input type='text' name='title'>
@@ -39,7 +39,7 @@
             <input type='submit' class='btn' value='ok'>
         </form>
 
-        <h2>登录测试</h2>
+        <h2>登录</h2>
         <form action='/interface/login' method='post'>
             <label>用户名</label>
             <input type='text' name='username'>
@@ -48,13 +48,30 @@
             <input type='submit' class='btn' value='ok'>
         </form>
 
-        <h2>获取文章测试</h2>
+        <h2>获取文章</h2>
         <form action='/interface/get_article' method='post'>
             <label>标题</label>
             <input type='text' name='title'>
             <label>分类</label>
             <input type='test' name='cls'>
             <input type='submit' class='btn' value='ok'>
+        </form>
+        <h2>获取最近的文章</h2>
+        <form action='/interface/get_recent_article' method='post'>
+            <label>最大数量</label>
+            <input type='text' name='limit'>
+            <input type='submit' class='btn' value='ok'>
+        </form>
+        <h2>增加类别</h2>
+        <form action='/interface/create_cls' method='post'>
+            <input type='text' name='cls'>
+            <input type='submit' class='btn'>
+        </form>
+
+        <h2>删除类别</h2>
+        <form action='/interface/del_cls' method='post'>
+            <input type='text' name='cls'>
+            <input type='submit' class='btn'>
         </form>
     </body>
     <script>

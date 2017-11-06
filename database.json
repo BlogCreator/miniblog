@@ -1,1 +1,1 @@
-{"_default": {"1": {"date": {"month": 11, "year": 2017, "day": 6, "hour": 11, "minute": 7, "second": 31}, "cls": "other", "desc": "...", "file": "mc.sh", "title": "untitled"}}}
+{"meta": {"1": {"key": "meta", "cls": ["other", "test"]}}, "_default": {"1": {"date": "2017-11-06T16:38:13.172953", "cls": "other", "desc": "...", "file": "hmcl.json", "title": "test"}, "2": {"date": "2017-11-06T16:38:21.822765", "cls": "other", "desc": "...", "file": "mc.sh", "title": "test2"}}}
