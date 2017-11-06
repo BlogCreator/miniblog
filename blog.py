@@ -50,6 +50,8 @@ def get_article(title=None,cls=None):
 
 @bobo.query('/interface/get_recent_article')
 def get_recent_article(limit=100):
+    if limit == '':
+        limit = 100
     result = db.all()[:int(limit)]
     result.sort(key=lambda k:k['date'],reverse=True)
     wrap_article_result(result)
