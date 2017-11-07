@@ -1,0 +1,158 @@
+
+#banner{
+  background: url("../image/banner_top.jpg") no-repeat;
+  background-size: 1300px 230px;
+  height:265px;
+}
+.banner_all{
+  width:1000px;
+  margin:auto;
+  overflow: hidden;
+}
+.banner_text{
+  width:350px;
+  float:left;
+  margin:60px 0 0 20px;
+  font-size: 14px;
+  color:white;
+}
+.myInfor{
+  float:right;
+  margin:40px;
+  width:130px;
+  height:130px;
+  overflow: hidden;
+  border:solid 4px white;
+  border-radius: 100%;
+  transition: all .5s ease-in-out;
+}
+.myInfor:hover{
+  transform:rotate(360deg);
+}
+.myInfor:hover .name{
+  margin-top: 0px;
+}
+.myInfor a{
+  background: url("../image/head.jpg");
+  display:block;
+  width:130px;
+  padding-top:93px;
+  background-size: 130px 130px;
+}
+.myInfor a span{
+  display:block;
+  width:130px;
+  height:55px;
+  padding-top: 8px;
+  margin-top:63px;
+  background: rgba(0,0,0,.5);
+  text-align: center;
+  transition: all .2s ease-in-out;
+  color:white;
+}
+.visitor{
+  font-size: 12px;
+  color:grey;
+  margin-bottom: 20px;
+}
+.vis{
+  font-size: 15px;
+  color:red;
+}
+/*.wrap{
+  position:relative;
+  margin:auto;
+  padding:100px 50px;
+  width:900px;
+  perspective: 900px;
+  min-height:100px;
+}
+#container{
+  position:absolute;
+  left: 50%;
+  margin-left:-102px;
+  height:150px;
+  width:200px;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+}
+.box{
+  position:absolute;
+  bottom: 0;
+  width:200px;
+  height:150px;
+  line-height: 150px;
+  text-align: center;
+  font-size: 25px;
+  color:white;
+}
+.demo1{background-color:red;}
+.demo2{background-color:green;}
+.demo3{background-color:blue;}
+.demo4{background-color:grey;}
+.demo5{background-color:purple;}-*/
+#anticle{
+  width:1000px;
+  margin:20px auto;
+  overflow: hidden;
+}
+.an_title{
+  width：1000px;
+  font-weight: bold;
+  background: url("../image/line.jpg") repeat-x 20px;
+}
+.an_title span{
+  color:purple;
+}
+.an_title h2{
+  background: white;
+  font-size: 18px;
+  width:90px;
+}
+.an_left{
+  float:left;
+  width:740px;
+  background: url("../image/line.jpg") repeat-y  right center ;
+  background-size: 7px;
+  height:300px;
+}
+.an_l_title{
+  margin-top: 30px;
+}
+.an_l_title h3{
+  display:inline-block;
+  font-size: 15px;
+  font-weight:bold;
+}
+.an_l_title span{
+  background: url("../image/new.gif") no-repeat center ;
+  padding-left:50px;
+}
+.an_l_body{
+  margin-top:20px;
+  overflow: hidden;
+}
+.an_l_body a{
+  float:left;
+}
+.an_l_body .content{
+  float:left;
+  padding:15px;
+  font-size: 12px;
+}
+.an_l_foot{
+  width:680px;
+  background-color: rgb(230,230,230);
+  font-size: 12px;
+  color:grey;
+}
+.an_l_foot p{
+  padding:10px;
+}
+.an_l_foot span{
+  padding-right:15px;
+}
+.an_right{
+  float:right;
+  width:250px;
+}

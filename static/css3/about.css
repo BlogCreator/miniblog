@@ -1,0 +1,34 @@
+.top_current{
+  color:green;
+}
+.aboutme{
+  width:1000px;
+  margin:auto;
+  overflow: hidden;
+}
+.justme{
+  margin-top: 20px;
+  padding:0 20px;
+  float:left;
+  width:700px;
+  background: url("../image/line.jpg") repeat-y right;
+
+  background-size: 8px;
+}
+.justme h2{
+  margin: 20px 0;
+  color:grey;
+  font-size: 20px;
+}
+.justme p{
+  font: 12px "宋体", Arial, Helvetica, sans-serif;
+  color:#696969;
+  line-height: 22px;
+}
+.personInfor{
+  float:left;
+  margin-top: 20px;
+  padding:20px;
+  font: 12px "宋体", Arial, Helvetica, sans-serif;
+  color:rgb(180,180,180);
+}
