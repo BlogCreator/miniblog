@@ -1,0 +1,103 @@
+*{
+  margin:0;
+  padding:0;
+}
+a{
+  text-decoration: none;
+}
+#header{
+  width:1000px;
+  height:80px;
+  margin:auto;
+  overflow:hidden;
+}
+.logo a{
+  position:absolute;
+  display:block;
+  width:300px;
+  height:60px;
+  margin-top:10px;
+}
+.logo a img{
+  width:300px;
+  height:60px;
+}
+.header_nav{
+  float:right;
+  margin-top: 30px;
+  overflow: hidden;
+}
+.header_link{
+  display:inline-block;
+  padding:0 8px;
+  margin:0 5px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.header_link span:first-child{
+  display:block;
+}
+.header_link span:last-child{
+  display:block;
+  font-size: 12px;
+  color:grey;
+  transition:all 0.5s linear;
+  transform: translateY(-100%);
+  opacity: 0;
+  text-align: center;
+}
+.header_link:hover span:last-child{
+  transform:translateY(0px);
+  opacity:1;
+  text-align: center;
+}
+.top_current{
+  color:green;
+}
+#myanticle{
+  width:1000px;
+  margin:auto;
+  overflow: hidden;
+}
+.slogan{
+  border-bottom: 1px solid rgb(233,233,233);
+}
+.slogan p{
+  padding:7px;
+  font-size: 15px;
+  text-align: right;
+}
+.r_content{
+  float:left;
+  margin-top:20px;
+  padding:20px;
+  width:200px;
+}
+.search input{
+  width:120px;
+}
+.search button{
+  display:inline-block;
+  width:60px;
+}
+.s_content{
+  overflow: hidden;
+  margin-top:20px;
+  line-height: 25px;
+}
+.s_content1{
+  float:left;
+  width:70px;
+  padding:10px;
+  margin-top:10px;
+  background-color: red;
+  border-radius: 5px;
+}
+.s_content2{
+  float:right;
+  width:70px;
+  padding:10px;
+  margin-top:10px;
+  background-color: green;
+  border-radius: 5px;
+}

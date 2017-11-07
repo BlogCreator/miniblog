@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .all{
+        width:200px;
+        height:200px;
+        overflow: hidden;
+      }
+      .wrap{
+        width:600px;
+        overflow: hidden;
+        transition: all 1s ease-in-out;
+      }
+      .demo{
+        float:left;
+        width:200px;
+        height:200px;
+      }
+      .de1{
+        background-color:red;
+      }
+      .de2{
+        background-color:green;
+      }
+      .de3{
+        background-color:blue;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="all">
+      <div class="wrap">
+        <div class="demo de1"></div>
+        <div class="demo de2"></div>
+        <div class="demo de3"></div>
+      </div>
+    </div>
+    <a href="#1">1</a>
+    <a href="#2">2</a>
+    <a href="#3">3</a>
+  </body>
+  <script>
+    var a=document.getElementsByTagName("a");
+    var wrap=document.getElementsByClassName("wrap")[0];
+    for(var i=0;i<a.length;i++)
+    {
+      (function(s){
+        a[s].onclick=function()
+        {
+          var l=Number(this.href.replace(/.*#/,""));
+          wrap.style.marginLeft=(1-l)*200+"px";
+        }
+      })(i);
+    }
+  </script>
+</html>
