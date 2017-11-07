@@ -19,6 +19,7 @@ def wrap_article_result(db_result):
             with open(UPLOAD+i['file'],'r') as file:
                 i['content'] = file.read()
 
+
 @bobo.query('/interface/login')
 def login(bobo_request,username,password):
     if username=='admin' and password=='123456':
@@ -31,9 +32,23 @@ def login(bobo_request,username,password):
     else:
         return '{"success":"false","msg":"username or password error"}'
 
-@bobo.query('/static/:static')
-def static(static):
-    return open(STATIC+static, 'r').read()
+@bobo.query('/static/:sub_path')
+def get_static_file(subpath):
+    content = ''
+    with open(STATIC+subpath, 'r') as staticfile:
+        content = staticfile.read()
+    return content
+
+@bobo.subroute('/static/:dir', scan=True)
+class subroute:
+    def __init__(self, request, dir):
+        self.dir = dir
+        self.url = request.url
+        
+
+    @bobo.query('/:static')
+    def index(self, static):
+        return get_static_file(self.dir + '/' +static)
 
 @bobo.query('/interface/get_article')
 def get_article(title=None,cls=None):
