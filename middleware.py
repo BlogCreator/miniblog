@@ -9,8 +9,10 @@ def access_record(environ):
         "time":datetime.now().timetuple(),
         "date":datetime.now().timetuple()[:3]
     })
-def session_id(environ):
+def session_id():
+    request = yield
     if 'session_id' in request.cookies:
-        pass
-    else:
-        response.set_cookie('session_id', str(uuid.uuid1()))
+        return
+    request.cookies['session_id'] = uuid.uuid1()
+    response = yield
+    response.set_cookies(request.cookies['session_id'])
