@@ -7,5 +7,5 @@ db = tinydb.TinyDB(DB_PATH)
 
 
 MIDDLEWARE=[
-    middleware.session_id
+    middleware.session_id,
 ]
