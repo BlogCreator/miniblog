@@ -122,3 +122,4 @@ setInterval(function(){
   var d=s.replace(/(\d{1,})/,72*p);
   container.style.transform=d;
 },2000);
+//点击排行
