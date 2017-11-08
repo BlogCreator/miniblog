@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录</title>
+  <style>
+    .all{
+      width:800px;
+      margin:20px auto;
+      text-align: center;
+    }
+    input{
+      padding:5px;
+      margin-bottom: 10px;
+    }
+    textarea{
+      resize: none;
+      width:240px;
+      height: 190px;
+      margin-bottom: 15px;
+      border: 2px solid grey;
+      border-radius: 2px;
+    }
+    label{
+      display:inline-block;
+      width:50px;
+    }
+    .error{
+      display: none;
+      color:red;
+      font-size: 13px;
+      text-align: center;
+      margin-top:20px;
+    }
+    .btn{
+      padding:3px;
+      width:250px;
+      background-color: green;
+      color:white;
+      cursor: pointer;
+    }
+    .sub{
+      width:800px;
+      margin:20px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="all">
+    <form action="/interface/login" method="post">
+        <div class="userName">
+          <label>用户名</label>
+          <input class="username" type="text" name="username">
+        </div>
+        <div class="password">
+          <label>密码</label>
+          <input class="passWord" type="text" name="password">
+        </div>
+        <div>
+          <label></label>
+          <input type="button" class="btn" value="登录">
+        </div>
+    </form>
+    <div class="error">
+      <span>对不起,您输入的密码有误</span>
+    </div>
+  </div>
+</body>
+<script>
+  var btn=document.getElementsByClassName("btn")[0];
+  btn.onclick=function(){
+    var xml=new XMLHttpRequest();
+    xml.onreadystatechange=function(){
+      var json=JSON.parse(xml.responseText);
+      if(json.success=="true"){
+        var sub=document.getElementsByClassName("sub")[0];
+        sub.innerHTML+='<div class="sub">\
+          <form action="/interface/publish_article" method="post" enctype="multipart/form-data">\
+            <div>\
+              <label>标题</label>\
+              <input type="text" name="title">\
+            </div>\
+            <div>\
+              <label></label>\
+              <textarea type="textarea" name="desc" placeholder="写下你的描述"></textarea>\
+            </div>\
+            <div>\
+              <label>类别</label>\
+              <input type="text" name="cls">\
+            </div>\
+            <div>\
+              <label>文件</label>\
+              <input type="file" style="width:243px" name="file">\
+            </div>\
+            <div>\
+              <label></label>\
+              <input type="button" class="btn" value="发布">\
+            </div>\
+          </form>\
+        </div>'
+      }
+      else{
+        var error=document.getElementsByClassName("error")[0];
+        error.style.display="block";
+      }
+    }
+    console.log(document.getcookie);
+    xml.open("post","/interface/login",true);
+    var username=document.getElementsByClassName("username")[0].value;
+    var password=document.getElementsByClassName("passWord")[0].value;
+    console.log(document.getElementsByClassName("username")[0]);
+    xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xml.send("username="+username+"&password="+password);
+  }
+</script>
+</html>

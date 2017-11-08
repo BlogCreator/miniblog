@@ -81,9 +81,12 @@ a{
   width:60px;
 }
 .s_content{
+  text-align: center;
   overflow: hidden;
   margin-top:20px;
   line-height: 25px;
+  color: white;
+  cursor: pointer;
 }
 .s_content1{
   float:left;

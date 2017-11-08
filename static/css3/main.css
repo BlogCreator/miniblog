@@ -59,38 +59,48 @@
   font-size: 15px;
   color:red;
 }
-/*.wrap{
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+.wrap{
   position:relative;
-  margin:auto;
-  padding:100px 50px;
-  width:900px;
+  margin:20px auto ;
+  width:100px;
   perspective: 900px;
-  min-height:100px;
+  min-height:50px;
 }
 #container{
   position:absolute;
-  left: 50%;
+  left:81%;
   margin-left:-102px;
-  height:150px;
-  width:200px;
+  height:50px;
+  width:100px;
   transform-style: preserve-3d;
   transition: all 1s ease-in-out;
 }
 .box{
   position:absolute;
   bottom: 0;
-  width:200px;
-  height:150px;
-  line-height: 150px;
+  width:100px;
+  height:50px;
+  line-height: 50px;
   text-align: center;
-  font-size: 25px;
+  font-size: 15px;
   color:white;
 }
 .demo1{background-color:red;}
 .demo2{background-color:green;}
 .demo3{background-color:blue;}
 .demo4{background-color:grey;}
-.demo5{background-color:purple;}-*/
+.demo5{background-color:purple;}
+.des_resolve{
+  padding-left:40px;
+  font-weight: bold;
+  color:purple;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
 #anticle{
   width:1000px;
   margin:20px auto;
@@ -114,7 +124,6 @@
   width:740px;
   background: url("../image/line.jpg") repeat-y  right center ;
   background-size: 7px;
-  height:300px;
 }
 .an_l_title{
   margin-top: 30px;
@@ -130,15 +139,28 @@
 }
 .an_l_body{
   margin-top:20px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 .an_l_body a{
   float:left;
+  width:173px;
+  height:150px;
+  background-color: green;
+}
+.an_l_body a img{
+  padding:4px;
+  border:#f4f2f2 1px solid;
+  width:175px;
+  transition: all 0.5s ease-out;
+}
+.an_l_body a img:hover{
+  transform: scale(1.05,1.05);
 }
 .an_l_body .content{
   float:left;
   padding:15px;
-  font-size: 12px;
+  font-size: 15px;
 }
 .an_l_foot{
   width:680px;
@@ -155,4 +177,30 @@
 .an_right{
   float:right;
   width:250px;
+}
+.more{
+  display:none;
+}
+.my_body{
+  height:690px;
+  overflow: hidden;
+}
+.blank{
+  margin:15px auto;
+  background: url("../image/r_title_bg.jpg") repeat-x center;
+  color:#756f71;
+  font-weight: bold;
+  font-size: 14px;
+}
+.blank p{
+  width:80px;
+  background-color: white;
+  padding:0;
+}
+.title_index li{
+  margin-left:20px;
+  font-size: 13px;
+}
+.title_index li a{
+  color:black;
 }
