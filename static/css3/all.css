@@ -69,8 +69,7 @@ a{
 }
 .r_content{
   float:left;
-  margin-top:20px;
-  padding:20px;
+  padding:10px;
   width:200px;
 }
 .search input{
@@ -91,16 +90,15 @@ a{
 .s_content1{
   float:left;
   width:70px;
-  padding:10px;
-  margin-top:10px;
-  background-color: red;
+  padding:5px;
+  background:url("../image/bg.jpeg");
   border-radius: 5px;
 }
 .s_content2{
-  float:right;
+  float:left;
+  margin-left:10px;
   width:70px;
-  padding:10px;
-  margin-top:10px;
+  padding:5px;
   background-color: green;
   border-radius: 5px;
 }

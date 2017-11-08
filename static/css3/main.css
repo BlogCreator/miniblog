@@ -69,10 +69,11 @@ a{
   width:100px;
   perspective: 900px;
   min-height:50px;
+  font-size: 15px;
 }
 #container{
   position:absolute;
-  left:81%;
+  left:90%;
   margin-left:-102px;
   height:50px;
   width:100px;
@@ -86,12 +87,12 @@ a{
   height:50px;
   line-height: 50px;
   text-align: center;
-  font-size: 15px;
+  font-size:13px;
   color:white;
 }
-.demo1{background-color:red;}
+.demo1{background-color:blue;}
 .demo2{background-color:green;}
-.demo3{background-color:blue;}
+.demo3{background-color:yellow;}
 .demo4{background-color:grey;}
 .demo5{background-color:purple;}
 .des_resolve{
@@ -138,20 +139,17 @@ a{
   padding-left:50px;
 }
 .an_l_body{
-  margin-top:20px;
-  margin-bottom: 20px;
+  margin-top:10px;
+  margin-bottom:10px;
   overflow: hidden;
 }
 .an_l_body a{
   float:left;
-  width:173px;
-  height:150px;
-  background-color: green;
 }
 .an_l_body a img{
   padding:4px;
-  border:#f4f2f2 1px solid;
   width:175px;
+  height:100px;
   transition: all 0.5s ease-out;
 }
 .an_l_body a img:hover{
@@ -160,13 +158,25 @@ a{
 .an_l_body .content{
   float:left;
   padding:15px;
+  color:#756F71;
   font-size: 15px;
+  line-height: 20px;
+  height:40px;
+}
+.read{
+  float:right;
+  background: #fd8a61;
+  color:white;
+  font-size: 12px;
+  padding:5px 10px;
+  margin-top:80px;
+  margin-right:60px;
 }
 .an_l_foot{
   width:680px;
   background-color: rgb(230,230,230);
   font-size: 12px;
-  color:grey;
+  color:#838383;
 }
 .an_l_foot p{
   padding:10px;
@@ -186,7 +196,7 @@ a{
   overflow: hidden;
 }
 .blank{
-  margin:15px auto;
+  margin:10px auto;
   background: url("../image/r_title_bg.jpg") repeat-x center;
   color:#756f71;
   font-weight: bold;
@@ -197,9 +207,29 @@ a{
   background-color: white;
   padding:0;
 }
+.title_index1{
+  list-style: none;
+  background: url("../image/ph.jpg") no-repeat left 8px;
+}
+.title_index1 li{
+  height:30px;
+  line-height: 33px;
+  border-bottom:1px #CCC dotted;
+  padding-left:24px;
+  font-size: 12px;
+}
+.title_index1 li a{
+  color:black;
+}
+.title_index{
+  list-style: none;
+}
 .title_index li{
-  margin-left:20px;
-  font-size: 13px;
+  background: url("../image/li.jpg") no-repeat left center;
+  padding-left:15px;
+  height:25px;
+  line-height: 25px;
+  font-size: 12px;
 }
 .title_index li a{
   color:black;
