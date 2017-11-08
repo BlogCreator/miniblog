@@ -10,8 +10,7 @@ def access_record(environ):
 def session_id():
     request = yield
     if 'session_id' in request.cookies:
-        print("already has session id")
         return
     request.cookies['session_id'] = str(uuid.uuid1())
     response = yield
-    response.set_cookie(request.cookies['session_id'])
+    response.set_cookie("session_id",request.cookies['session_id'])

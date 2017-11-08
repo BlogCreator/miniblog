@@ -3,12 +3,12 @@ from setting import *
 import bobo
 import tinydb
 import datetime
-import os
-import sys
 import json
 
 ADMIN_SESSIONID = set()
 def authentication(instance,request, decorated):
+    print(ADMIN_SESSIONID)
+    print(request.cookies['session_id'])
     if request.cookies['session_id'] not in ADMIN_SESSIONID:
         resp = bobo.webob.Response()
         resp.body = b'{"success":"false","msg":"authentication fail!"}'
@@ -18,14 +18,17 @@ def wrap_article_result(db_result):
     if hasattr(db_result, '__getitem__'):
         for i in db_result:
             with open(UPLOAD+i['file'],'r') as file:
-                i['content'] = file.read()
+                try:
+                    i['content'] = file.read()
+                except:
+                    i['content'] = 'file read error!'
 
 
 @bobo.query('/interface/login')
 def login(bobo_request,username,password):
     if username=='admin' and password=='123456':
         if 'session_id' in bobo_request.cookies:
-            print(ADMIN_SESSIONID)
+            global ADMIN_SESSIONID
             ADMIN_SESSIONID.add(bobo_request.cookies['session_id'])
             return '{"success":"true"}'
         else:
@@ -117,7 +120,7 @@ def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
                 "desc":desc if desc else '...',
                 "date":datetime.datetime.now().timetuple(),
                 "cls":cls if cls else 'other',
-                "pic":UPLOAD+'pic/'+pic.filename if pic and hasattr(pic,'filename') else UPLOAD+"pic/default.jpg",
+                "pic":UPLOAD+'pic/'+pic.filename if (pic is not None) and hasattr(pic,'filename') else UPLOAD+"pic/default.jpg",
             })
             return '{"sucess":"true"}'
         else:
@@ -165,3 +168,16 @@ def get_access(start=None, end=None):
         return json.dumps({"success":"true","result":num})
     else:
         return json.dumps({"success":"false","msg":"date is not illege"})
+
+@bobo.query('/interface/click')
+def click(title=None):
+    if title and len(db.search(tinydb.Query().title==title))!=0:
+        t = db.table(name="click")
+        r = t.search(tinydb.Query().title == title)
+        if len(r) == 0:
+            t.insert({"title":title,"click":1})
+        else:
+            t.update({"click":r[0]['click']+1}, tinydb.Query().title==title)
+        return json.dumps({"success":"true"})
+    else:
+        return json.dumps({"success":"false","msg":"title can not be null"})
