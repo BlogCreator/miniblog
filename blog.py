@@ -58,6 +58,13 @@ def get_recent_article(limit=100):
     wrap_article_result(result)
     return json.dumps({"success":"true","result":result})
 
+@bobo.query('/interface/get_click_article')
+def get_click_article(limit=5):
+    if limit == '': limit = 5
+    r = db.table("click").all()
+    r.sort(key=lambda d:d['click'],reverse=True)
+    r = r[:int(limit)]
+    return json.dumps({"success":"true","result":r})
 @bobo.query('/interface/get_cls')
 def get_cls():
     meta = db.table(name='meta').all()
