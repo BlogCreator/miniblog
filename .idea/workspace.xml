@@ -14,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="core.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="core.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
@@ -26,21 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bobo.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bobo.py" pinned="false" current-in-tab="true">
         <entry file="file:///usr/local/lib/python3.5/dist-packages/bobo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="194">
               <caret line="246" column="40" lean-forward="true" selection-start-line="246" selection-start-column="40" selection-end-line="246" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -173,14 +163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/bobo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="246" column="40" lean-forward="true" selection-start-line="246" selection-start-column="40" selection-end-line="246" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -188,6 +170,14 @@
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.5/dist-packages/bobo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="246" column="40" lean-forward="true" selection-start-line="246" selection-start-column="40" selection-end-line="246" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
