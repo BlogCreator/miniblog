@@ -77,8 +77,37 @@
             <input type='text' name='cls'>
             <input type='submit' class='btn'>
         </form>
+
+        <h2>评论</h2>
+        <form action='/interface/comment' method='post'>
+            <label>用户名:</label>
+            <input type='text' name='name'>
+            <label>文章标题:</label>
+            <input type='text' name='title'>
+            <label>内容:</label>
+            <input type='text' name='content'>
+            <input type='submit' class='btn'>
+        </form>
+
+        <h2>获取评论</h2>
+        <form action='/interface/get_comment' method='post'>
+            <label>标题:</label>
+            <input type='text' name='title'>
+            <label>最大数量限制:</label>
+            <input type='text' name='limit'>
+            <input type='submit' class='btn'>
+        </form>
+
+        <h2>获取访问量</h2>
+        <form action='/interface/get_access' method='post'>
+            <label>开始日期:</label>
+            <input type='date' name='start'>
+            <label>结束日期:</label>
+            <input type='date' name='end'>
+            <input type='submit' class='btn'>
+        </form>
     </body>
     <script>
-
+        document.cookie
     </script>
 </html>

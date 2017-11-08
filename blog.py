@@ -1,14 +1,15 @@
 #! /usr/bin/python3
+from setting import *
 import bobo
 import tinydb
 import datetime
 import os
 import sys
 import json
-from setting import *
 
+ADMIN_SESSIONID = set()
 def authentication(instance,request, decorated):
-    if request.cookies['optimizelyEndUserId'] not in ADMIN_SESSIONID:
+    if request.cookies['session_id'] not in ADMIN_SESSIONID:
         resp = bobo.webob.Response()
         resp.body = b'{"success":"false","msg":"authentication fail!"}'
         return resp
@@ -23,12 +24,12 @@ def wrap_article_result(db_result):
 @bobo.query('/interface/login')
 def login(bobo_request,username,password):
     if username=='admin' and password=='123456':
-        if 'optimizelyEndUserId' in bobo_request.cookies:
+        if 'session_id' in bobo_request.cookies:
             print(ADMIN_SESSIONID)
-            ADMIN_SESSIONID.add(bobo_request.cookies['optimizelyEndUserId'])
+            ADMIN_SESSIONID.add(bobo_request.cookies['session_id'])
             return '{"success":"true"}'
         else:
-            return '{"success":"false","msg":"optimizelyEndUserId is null"}'
+            return '{"success":"false","msg":"session_id is null"}'
     else:
         return '{"success":"false","msg":"username or password error"}'
 
@@ -94,13 +95,15 @@ def del_cls(cls):
         return '{"success":"true"}'
 
 @bobo.query('/interface/publish_article',check=authentication)
-def pulish_article(file=None,title=None,desc=None,cls=None):
+def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
 
     if hasattr(file,'file') and hasattr(file,'filename'):
         with open(UPLOAD + file.filename,'wb') as new_file:
             new_file.write(file.file.read())
+    if hasattr(pic,'file') and hasattr(pic,'filename'):
+        with open(UPLOAD+'pic/'+pic.filename,'wb') as new_pic:
+            new_pic.write(pic.file.read())
 
-    date =  datetime.datetime.now().isoformat()
     query = tinydb.Query()
     if hasattr(file, 'filename'):
         result = db.search((query.title==title) | (query.file==file.filename))
@@ -111,11 +114,54 @@ def pulish_article(file=None,title=None,desc=None,cls=None):
             db.insert({
                 "file":file.filename if hasattr(file,'filename') else None,
                 "title":title if title else 'untitled',
-                "desc":desc if desc else '...h',
-                "date":date,
-                "cls":cls if cls else 'other'
+                "desc":desc if desc else '...',
+                "date":datetime.datetime.now().timetuple(),
+                "cls":cls if cls else 'other',
+                "pic":UPLOAD+'pic/'+pic.filename if pic and hasattr(pic,'filename') else UPLOAD+"pic/default.jpg",
             })
             return '{"sucess":"true"}'
         else:
             return '{"success":"false","msg":"title or filename already exist!"}'
     return '{"success":"false","msg":"file can not be null"}'
+
+@bobo.query('/interface/comment')
+def comment(bobo_request, title=None,content=None, name="anonymous"):
+    if not content or not title:
+        return json.dumps({"success":"false","msg":"content and title can not be null"})
+    commentdb = db.table(name='comment')
+    commentdb.insert({
+        "article_title":title,
+        "ip":bobo_request.remote_addr,
+        "name":name,
+        "content":content,
+        "date":datetime.datetime.now().timetuple()
+    })
+    return json.dumps({"success":"true"})
+
+@bobo.query('/interface/get_comment')
+def get_comment(title=None, limit=None):
+    if not title:
+        return json.dumps({"success":"false","msg":"we must have a title to get the comments"})
+    commentdb = db.table("comment")
+    result = commentdb.search(tinydb.Query().article_title == title)
+    print(result)
+    result = result[:int(limit)] if limit else result
+    return json.dumps({"success":"true","result":result})
+
+@bobo.query('/interface/get_access')
+def get_access(start=None, end=None):
+    if not start and not end:
+        num = len(db.table(name='access').all())
+        return json.dumps({"success":"true","result":num})
+    elif not end and start:
+        num = len(db.table(name='access')
+            .search(tinydb.Query().date==[int(i) for i in start.split('-')]))
+        return json.dumps({"success":"true","result":num})
+    elif end and start:
+        num = len(db.table(name='access').search(
+            (tinydb.Query().date>=[int(i) for i in start.split('-')]) &
+            (tinydb.Query().date<=[int(i) for i in end.split('-')])
+        ))
+        return json.dumps({"success":"true","result":num})
+    else:
+        return json.dumps({"success":"false","msg":"date is not illege"})
