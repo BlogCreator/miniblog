@@ -117,9 +117,9 @@ var box=document.getElementsByClassName("box");
 var p=0;
 var container=document.getElementById('container');
 setInterval(function(){
-  p++;
+  p+=3;
   var s=container.style.transform;
-  var d=s.replace(/(\d{1,})/,72*p);
+  var d=s.replace(/(\d{1,})/,p);
   container.style.transform=d;
-},2000);
+},50);
 //点击排行
