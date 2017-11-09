@@ -92,7 +92,7 @@ a{
 }
 .demo1{background-color:blue;}
 .demo2{background-color:green;}
-.demo3{background-color:yellow;}
+.demo3{background-color:orange;}
 .demo4{background-color:grey;}
 .demo5{background-color:purple;}
 .des_resolve{
@@ -168,6 +168,7 @@ a{
   background: #fd8a61;
   color:white;
   font-size: 12px;
+  cursor:pointer;
   padding:5px 10px;
   margin-top:80px;
   margin-right:60px;
@@ -233,4 +234,8 @@ a{
 }
 .title_index li a{
   color:black;
+}
+.title_index li span{
+  float:right;
+  color:grey;
 }
