@@ -46,11 +46,17 @@
       margin:20px auto;
       text-align: center;
     }
+    .login{
+      transition: all 1.5s ease-in-out;
+    }
+    .sub{
+      transition: all 1.5s ease-in-out;
+    }
   </style>
 </head>
 <body>
   <div class="all">
-    <form action="/interface/login" method="post">
+    <form class="login" action="/interface/login" method="post">
         <div class="userName">
           <label>用户名</label>
           <input class="username" type="text" name="username">
@@ -67,53 +73,9 @@
     <div class="error">
       <span>对不起,您输入的密码有误</span>
     </div>
+    <div class="sub">
+    </div>
   </div>
 </body>
-<script>
-  var btn=document.getElementsByClassName("btn")[0];
-  btn.onclick=function(){
-    var xml=new XMLHttpRequest();
-    xml.onreadystatechange=function(){
-      var json=JSON.parse(xml.responseText);
-      if(json.success=="true"){
-        var sub=document.getElementsByClassName("sub")[0];
-        sub.innerHTML+='<div class="sub">\
-          <form action="/interface/publish_article" method="post" enctype="multipart/form-data">\
-            <div>\
-              <label>标题</label>\
-              <input type="text" name="title">\
-            </div>\
-            <div>\
-              <label></label>\
-              <textarea type="textarea" name="desc" placeholder="写下你的描述"></textarea>\
-            </div>\
-            <div>\
-              <label>类别</label>\
-              <input type="text" name="cls">\
-            </div>\
-            <div>\
-              <label>文件</label>\
-              <input type="file" style="width:243px" name="file">\
-            </div>\
-            <div>\
-              <label></label>\
-              <input type="button" class="btn" value="发布">\
-            </div>\
-          </form>\
-        </div>'
-      }
-      else{
-        var error=document.getElementsByClassName("error")[0];
-        error.style.display="block";
-      }
-    }
-    console.log(document.getcookie);
-    xml.open("post","/interface/login",true);
-    var username=document.getElementsByClassName("username")[0].value;
-    var password=document.getElementsByClassName("passWord")[0].value;
-    console.log(document.getElementsByClassName("username")[0]);
-    xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    xml.send("username="+username+"&password="+password);
-  }
-</script>
+<script src="../js/login.js"></script>
 </html>
