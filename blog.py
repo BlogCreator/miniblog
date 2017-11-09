@@ -4,7 +4,7 @@ import bobo
 import tinydb
 import datetime
 import json
-
+import markdown
 ADMIN_SESSIONID = set()
 def authentication(instance,request, decorated):
     print(ADMIN_SESSIONID)
@@ -14,14 +14,20 @@ def authentication(instance,request, decorated):
         resp.body = b'{"success":"false","msg":"authentication fail!"}'
         return resp
 
-def wrap_article_result(db_result):
+def wrap_article_result(db_result,convert=markdown.markdown):
     if hasattr(db_result, '__getitem__'):
         for i in db_result:
-            with open(UPLOAD+i['file'],'r') as file:
-                try:
-                    i['content'] = file.read()
-                except:
-                    i['content'] = 'file read error!'
+            try:
+                with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
+                    i['content'] = convert(file.read())
+            except:
+                i['content'] = "an error was occurred while reading the file"
+
+@bobo.query('/')
+def index(bobo_request):
+    t = db.table("access")
+    t.insert({"date":datetime.datetime.now().timetuple(),"ip":bobo_request.remote_addr})
+    return bobo.redirect(url='/static/main/main1.html')
 
 
 @bobo.query('/interface/login')
