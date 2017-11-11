@@ -67,18 +67,6 @@ a{
   font-size: 15px;
   text-align: right;
 }
-.r_content{
-  float:left;
-  padding:10px;
-  width:200px;
-}
-.search input{
-  width:120px;
-}
-.search button{
-  display:inline-block;
-  width:60px;
-}
 .s_content{
   text-align: center;
   overflow: hidden;
@@ -101,4 +89,27 @@ a{
   padding:5px;
   background-color: lightBlue;
   border-radius: 5px;
+}
+@media screen and (max-width: 430px){
+  .r_content{
+    padding:10px;
+    width: 95%;
+  }
+  .search{
+    display: none;
+  }
+}
+@media screen and (min-width: 430ox){
+  .r_content{
+    float:left;
+    padding:10px;
+    width:200px;
+  }
+  .search input{
+    width:120px;
+  }
+  .search button{
+    display:inline-block;
+    width:60px;
+  }
 }
