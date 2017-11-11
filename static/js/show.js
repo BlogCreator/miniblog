@@ -47,7 +47,6 @@ function getContent(json){
   var titleIndex1=document.getElementsByClassName("title_index1")[0];
   titleIndex1.innerHTML="";
   console.log(count);
-  if(count==0){myBody.innerHTML="对不起你搜索的标题不存在"}
   for(var i=0;i<count;i++){
     myBody.innerHTML+=bu;
     var title=document.getElementsByClassName("an_l_title")[i].getElementsByTagName("h3")[0];
@@ -94,14 +93,8 @@ hello.prototype={
       }
       clickSearch();
     });
-    //点击某类别后显示内容或点击搜索框出现的内容
+    //点击某类别后显示内容
     function clickSearch(){
-      var sea=document.getElementsByClassName("search")[0];
-      var btn=sea.getElementsByTagName("button")[0];
-      btn.onclick=function(){
-        var value=sea.getElementsByTagName("input")[0].value;
-        self.searchTitle(value,self.readme);
-      }
       for(var i=0;i<sContent.children.length;i++){
         (function(u){
             sContent.children[u].onclick=function(){
@@ -117,8 +110,8 @@ hello.prototype={
     myAjax("post","/interface/get_recent_article","application/x-www-form-urlencoded","limit:5",function(cl){
         var length=cl.result.length;
         var cl=cl.result;
-        getContent(cl);
-        self.showornot(length);
+        //getContent(cl);
+        //self.showornot(length);
         self.readme();
     });
   },
@@ -156,40 +149,36 @@ hello.prototype={
   },
   //点击阅读
   readme:function(){
-    var self=this;
-    var r=myBody.getElementsByClassName("read");
-    for(var i=0;i<r.length;i++){
-      (function(s){
-          r[s].onclick=function(){
-          //event.stopPropagation();
-          var title=document.getElementsByClassName("an_l_title")[s].getElementsByTagName("h3")[0].innerText;
-          window.open("../instenct/"+title);
-          self.addClick(title);
-          myBody.innerHTML="";
-          myAjax("post","/interface/get_article","application/x-www-form-urlencoded","title="+title,function(cl){
-            var cl=cl.result;
-            var length=cl.length;
-            myBody.innerHTML='<div class="mymargin">'+cl[0].content+'</div>';
-            //异步添加评论区
-            myBody.innerHTML+='<div class="reivew">\
-              <textarea class="review_content" placeholder="留下你的评论吧。。。"></textarea>\
-              <div class="review_name">你的名字:<input type="text" required/></div>\
-              <div class="re_btn"></div>\
-            </div>\
-            <div class="loadReview">\
-              <div class="review_title"><span>评论</span>\
-                <div class="review_number"><i></i>条评论</div>\
-              </div>\
-            </div>\
-            <div class="allReview"></div>'
-            self.getReview(title);
-          });
-        }
-      })(i);
-    }
-    self.showornot(r.length);
-    //more.style.display="none";
-   //myBody.style.height="auto";
+      var self=this;
+      //var r=myBody.getElementsByClassName("read");
+      //event.stopPropagation();
+      //var title=window.parent.document.getElementsByClassName("an_l_title")[s].getElementsByTagName("h3")[0].innerText;;
+      //console.log(title);
+      //self.addClick(title);
+      var arr=window.location.href.split("/");
+      var title=arr[arr.length-1];
+      console.log(title);
+      myBody.innerHTML="";
+      myAjax("post","/interface/get_article","application/x-www-form-urlencoded","title="+title,function(cl){
+        var cl=cl.result;
+        var length=cl.length;
+        myBody.innerHTML='<div class="mymargin">'+"anticle_my"+'</div>';
+        //异步添加评论区
+        myBody.innerHTML+='<div class="reivew">\
+          <textarea class="review_content" placeholder="留下你的评论吧。。。"></textarea>\
+          <div class="review_name">你的名字:<input type="text" required/></div>\
+          <div class="re_btn"></div>\
+        </div>\
+        <div class="loadReview">\
+          <div class="review_title"><span>评论</span>\
+            <div class="review_number"><i></i>条评论</div>\
+          </div>\
+        </div>\
+        <div class="allReview"></div>'
+        self.getReview(title);
+      });
+    more.style.display="none";
+    myBody.style.height="auto";
   },
   //增加点击量
   addClick:function(title){
@@ -203,17 +192,6 @@ hello.prototype={
   //html加载完成后动态添加搜索框,点击阅读全文
 
   //点击搜索框后显示内容
-  searchTitle:function(text,callback){
-    var self=this;
-    myAjax("post","/interface/get_article","application/x-www-form-urlencoded","title="+text,function(cl){
-      var length=cl.result.length;
-      var cl=cl.result;
-      myBody.innerHTML="";
-      getContent(cl);
-      self.showornot(length);
-      if(typeof callback==="function"){callback()}
-    });
-  },
   search:function(text,callback){
     var self=this;
     myAjax("post","/interface/get_article","application/x-www-form-urlencoded","cls="+text,function(cl){
@@ -229,7 +207,6 @@ hello.prototype={
     if(length>3){
       more.style.display="inline";
     }
-<<<<<<< HEAD
     else{
       more.style.display="none";
     }
@@ -238,37 +215,6 @@ hello.prototype={
       myBody.style.overflow="auto";
       myBody.style.height="100%";
       more.style.display="none";
-=======
-  }
-  xmlSearch.open("post","/interface/get_article",true);
-  xmlSearch.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  xmlSearch.send("cls="+text);
-}
-
-//自动旋转框
-var box=document.getElementsByClassName("box");
-var p=0;
-var container=document.getElementById('container');
-setInterval(function(){
-  p+=3;
-  var s=container.style.transform;
-  var d=s.replace(/(\d{1,})/,p);
-  container.style.transform=d;
-
-},50);
-
-
-//点击排行
-var xm=new XMLHttpRequest();
-xm.onreadystatechange=function(){
-  if(xm.status==200&&xm.readyState==4){
-    var json=JSON.parse(xm.responseText).result;
-    console.log(json.length);
-    for(var i=0;i<json.length;i++){
-    var titleIndex=document.getElementsByClassName("title_index")[0].getElementsByTagName("li");
-    titleIndex[i].getElementsByTagName("a")[0].innerText=json[i].title;
-    titleIndex[i].getElementsByTagName("i")[0].innerText=json[i].click;
->>>>>>> ad557d0bb7f8a705abe4daa23b89e460a26b7995
     }
   },
   //点击评论

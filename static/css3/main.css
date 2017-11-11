@@ -1,4 +1,6 @@
-
+li{
+  list-style: none;
+}
 #banner{
   background: url("../image/banner_top.jpg") no-repeat;
   background-size: 1300px 230px;
@@ -209,8 +211,10 @@ a{
   padding:0;
 }
 .title_index1{
+  max-height: 270px;
   list-style: none;
   background: url("../image/ph.jpg") no-repeat left 8px;
+  overflow: hidden;
 }
 .title_index1 li{
   height:30px;
@@ -238,4 +242,74 @@ a{
 .title_index li span{
   float:right;
   color:grey;
+}
+.mymargin{
+  margin:30px 20px;
+}
+.reivew{
+  margin:20px;
+  border:1px solid #e74851;
+  border-radius:3px;
+}
+.review_content{
+  border:none;
+  padding:20px 0px 0px 10px;
+  width:98%;
+  resize: none;
+  height:80px;
+}
+.review_name{
+  float: left;
+  margin-top:30px;
+  width:200px;
+}
+.review_name input{
+  width:80px;
+}
+.re_btn{
+  margin-top:30px;
+  float:right;
+  height: 30px;
+  width:100px;
+  cursor: pointer;
+  background:url("../image/btn.png") no-repeat;
+}
+.loadReview{
+  margin: 100px 20px 0 20px;
+  color:#e74851;
+}
+.review_title{
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e74851;
+}
+.review_title span{
+  font-size: 15px;
+  padding:5px;
+  border:1px solid #e74851;
+  border-radius: 10px;
+  border-bottom: none;
+}
+.review_number{
+  float:right;
+}
+.review_number i{
+  font-size: 20px;
+  padding-right:3px;
+}
+.showReview{
+  margin:50px 20px 0 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px dotted grey;
+}
+.reviewName{
+  color:#e74851;
+  font-size:15px;
+}
+.reviewTime{
+  float:right;
+  color:grey;
+  font-size:12px;
+}
+.showContent{
+  font: 12px "宋体", Arial, Helvetica, sans-serif;
 }
