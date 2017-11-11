@@ -245,4 +245,11 @@ def register(username,password):
         buf['login'] = {"username":username,"password":password}
         t.update(buf,tinydb.Query().key == 'meta')
     return json.dumps({"success":"true"})
+@bobo.query('/interface/article/:title')
+def show_article(title):
+    article = db.search(tinydb.Query().title==title)
+    if len(article) == 0:
+        return bobo.redirect('/')
+    else:
+        pass
 
