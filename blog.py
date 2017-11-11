@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 from setting import *
+import re
 import bobo
 import tinydb
 import datetime
@@ -245,4 +246,20 @@ def register(username,password):
         buf['login'] = {"username":username,"password":password}
         t.update(buf,tinydb.Query().key == 'meta')
     return json.dumps({"success":"true"})
+@bobo.query('/interface/article/:title')
+def show_article(title):
+    article = db.search(tinydb.Query().title==title)
+    if len(article) == 0:
+        return bobo.redirect('/')
+    else:
+        html = ''
+        with open('./template/show.html','r') as show:
+            html = show.read()
+            m = re.search('{article_my}',html)
+            wrap_article_result(article)
+            html = html[:m.span()[0]] + article[0]['content']+\
+                html[m.span()[1]:]
+        return html
+
+
 
