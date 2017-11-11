@@ -252,7 +252,14 @@ def show_article(title):
     if len(article) == 0:
         return bobo.redirect('/')
     else:
-        with open('./templage/show.html','r') as show:
+        html = ''
+        with open('./template/show.html','r') as show:
             html = show.read()
+            m = re.search('{article_my}',html)
+            wrap_article_result(article)
+            html = html[:m.span()[0]] + article[0]['content']+\
+                html[m.span()[1]:]
+        return html
+
 
 
