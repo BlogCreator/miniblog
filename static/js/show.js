@@ -158,11 +158,10 @@ hello.prototype={
       var arr=window.location.href.split("/");
       var title=arr[arr.length-1];
       console.log(title);
-      myBody.innerHTML="";
+      //myBody.innerHTML="";
       myAjax("post","/interface/get_article","application/x-www-form-urlencoded","title="+title,function(cl){
         var cl=cl.result;
         var length=cl.length;
-        myBody.innerHTML='<div class="mymargin">'+"anticle_my"+'</div>';
         //异步添加评论区
         myBody.innerHTML+='<div class="reivew">\
           <textarea class="review_content" placeholder="留下你的评论吧。。。"></textarea>\
