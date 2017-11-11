@@ -122,5 +122,32 @@
             <input type='date' name='end'>
             <input type='submit' class='btn'>
         </form>
+
+        <h2>设置博主信息</h2>
+        <form action='/interface/set_info' method='post'>
+            <label>姓名:</label>
+            <input type='text' name='name'>
+            <label>邮箱:</label>
+            <input type='email' name='email'>
+            <label>座右铭：</label>
+            <input type="text" name="motto">
+            <label>生日</label>
+            <input type="text" name="birthday">
+            <label>学校</label>
+            <input type="text" name="school">
+            <input type='submit' class='btn'>
+        </form>
+
+        <h2>获取博主信息</h2>
+        <form action="/interface/info" method="post">
+            <input type="submit" class="btn">
+        </form>
+
+        <h2>注册(之前的用户名和密码会失效)</h2>
+        <form action="/interface/register" method="post">
+            <input type="text" name="username">
+            <input type="text" name="password">
+            <input type="submit" class="btn">
+        </form>
     </body>
 </html>

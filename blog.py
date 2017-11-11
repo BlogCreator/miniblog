@@ -5,16 +5,30 @@ import tinydb
 import datetime
 import json
 import markdown
+from markdown.extensions import smart_strong
+from markdown.extensions import footnotes
+from markdown.extensions import fenced_code
+from markdown.extensions import toc
+from markdown.extensions import tables
+from markdown.extensions import def_list
+from markdown.extensions import smarty
+md = markdown.Markdown(extensions=[
+    smart_strong.makeExtension(),
+    footnotes.makeExtension(),
+    fenced_code.makeExtension(),
+    toc.makeExtension(),
+    tables.makeExtension(),
+    def_list.makeExtension(),
+    smarty.makeExtension(),
+])
 ADMIN_SESSIONID = set()
 def authentication(instance,request, decorated):
-    print(ADMIN_SESSIONID)
-    print(request.cookies['session_id'])
     if request.cookies['session_id'] not in ADMIN_SESSIONID:
         resp = bobo.webob.Response()
         resp.body = b'{"success":"false","msg":"authentication fail!"}'
         return resp
 
-def wrap_article_result(db_result,convert=markdown.markdown):
+def wrap_article_result(db_result,convert=md.convert):
     if hasattr(db_result, '__getitem__'):
         for i in db_result:
             try:
@@ -26,13 +40,16 @@ def wrap_article_result(db_result,convert=markdown.markdown):
 @bobo.query('/')
 def index(bobo_request):
     t = db.table("access")
-    t.insert({"date":datetime.datetime.now().timetuple(),"ip":bobo_request.remote_addr})
+    t.insert({"date":datetime.datetime.now().timetuple()[:3],"ip":bobo_request.remote_addr})
     return bobo.redirect(url='/static/main/main1.html')
 
 
 @bobo.query('/interface/login')
 def login(bobo_request,username,password):
-    if username=='admin' and password=='123456':
+    meta = db.table("meta").all()
+    if len(meta) != 0 and \
+        username==meta[0]['login']['username'] and \
+        password==meta[0]['login']['password'] :
         if 'session_id' in bobo_request.cookies:
             global ADMIN_SESSIONID
             ADMIN_SESSIONID.add(bobo_request.cookies['session_id'])
@@ -194,3 +211,38 @@ def click(title=None):
         return json.dumps({"success":"true"})
     else:
         return json.dumps({"success":"false","msg":"title can not be null"})
+
+@bobo.query('/interface/set_info',check=authentication)
+def set_info(name='null', email='null', motto='null',birthday='null',school="null"):
+    t = db.table('meta')
+    meta = t.all()
+    if len(meta)!=0:
+        meta[0]["info"] = {"name":name,"email":email,
+                           "motoo":motto,"birthday":birthday,
+                           "school":school}
+        t.update(meta[0],tinydb.Query().key == 'meta')
+    else:
+        t.insert({"key":"meta","info":{"name":name,"email":email,"motoo":motto}})
+
+    return json.dumps({"success":"true"})
+
+@bobo.query('/interface/info')
+def info():
+    t = db.table('meta')
+    meta = t.all()
+    if len(meta)==0 or 'info' not in meta[0].keys():
+        return json.dumps({"success":"false","msg":"the information is null"})
+    else:
+        return json.dumps({"success":"true","result":meta[0]["info"]})
+
+@bobo.query('/interface/register',check=authentication)
+def register(username,password):
+    t = db.table('meta')
+    if len(t.all()) == 0:
+        t.insert({"key":"meta","login":{"username":username,"password":password}})
+    else:
+        buf = t.all()[0]
+        buf['login'] = {"username":username,"password":password}
+        t.update(buf,tinydb.Query().key == 'meta')
+    return json.dumps({"success":"true"})
+

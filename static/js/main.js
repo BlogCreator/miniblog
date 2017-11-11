@@ -229,6 +229,7 @@ hello.prototype={
     if(length>3){
       more.style.display="inline";
     }
+<<<<<<< HEAD
     else{
       more.style.display="none";
     }
@@ -237,6 +238,37 @@ hello.prototype={
       myBody.style.overflow="auto";
       myBody.style.height="100%";
       more.style.display="none";
+=======
+  }
+  xmlSearch.open("post","/interface/get_article",true);
+  xmlSearch.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  xmlSearch.send("cls="+text);
+}
+
+//自动旋转框
+var box=document.getElementsByClassName("box");
+var p=0;
+var container=document.getElementById('container');
+setInterval(function(){
+  p+=3;
+  var s=container.style.transform;
+  var d=s.replace(/(\d{1,})/,p);
+  container.style.transform=d;
+
+},50);
+
+
+//点击排行
+var xm=new XMLHttpRequest();
+xm.onreadystatechange=function(){
+  if(xm.status==200&&xm.readyState==4){
+    var json=JSON.parse(xm.responseText).result;
+    console.log(json.length);
+    for(var i=0;i<json.length;i++){
+    var titleIndex=document.getElementsByClassName("title_index")[0].getElementsByTagName("li");
+    titleIndex[i].getElementsByTagName("a")[0].innerText=json[i].title;
+    titleIndex[i].getElementsByTagName("i")[0].innerText=json[i].click;
+>>>>>>> ad557d0bb7f8a705abe4daa23b89e460a26b7995
     }
   },
   //点击评论
