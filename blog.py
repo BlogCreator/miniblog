@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 from setting import *
+import re
 import bobo
 import tinydb
 import datetime
@@ -251,5 +252,7 @@ def show_article(title):
     if len(article) == 0:
         return bobo.redirect('/')
     else:
-        pass
+        with open('./templage/show.html','r') as show:
+            html = show.read()
+
 
