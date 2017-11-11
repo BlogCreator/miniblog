@@ -141,6 +141,17 @@ hello.prototype={
       var vis=document.getElementsByClassName("vis")[0];
       vis.innerText="  "+cl;
     });
+    var myDate=new Date();
+    var year=myDate.getFullYear();
+    var month=myDate.getMonth()+1;
+    var day=myDate.getDate();
+    var allDate=year+"-"+month+"-"+day;
+    console.log(allDate);
+    myAjax("post","/interface/get_access","application/x-www-form-urlencoded","start="+allDate+"&end=",function(cl){
+      var cl=cl.result;
+      var vis=document.getElementsByClassName("vis")[1];
+      vis.innerText="  "+cl;
+    });
   },
   //点击排行
   rank:function(){
