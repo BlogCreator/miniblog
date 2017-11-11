@@ -82,38 +82,6 @@ a{
   text-decoration: none;
   cursor: pointer;
 }
-.wrap{
-  position:relative;
-  margin:20px auto ;
-  width:100px;
-  perspective: 900px;
-  min-height:50px;
-  font-size: 15px;
-}
-#container{
-  position:absolute;
-  left:90%;
-  margin-left:-102px;
-  height:50px;
-  width:100px;
-  transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
-}
-.box{
-  position:absolute;
-  bottom: 0;
-  width:100px;
-  height:50px;
-  line-height: 50px;
-  text-align: center;
-  font-size:13px;
-  color:white;
-}
-.demo1{background-color:blue;}
-.demo2{background-color:green;}
-.demo3{background-color:orange;}
-.demo4{background-color:grey;}
-.demo5{background-color:purple;}
 .des_resolve{
   padding-left:40px;
   font-weight: bold;
@@ -133,12 +101,6 @@ a{
   background: white;
   font-size: 18px;
   width:90px;
-}
-.an_left{
-  float:left;
-  width:740px;
-  background: url("../image/line.jpg") repeat-y  right center ;
-  background-size: 7px;
 }
 .an_l_title{
   margin-top: 30px;
@@ -177,16 +139,6 @@ a{
   line-height: 20px;
   height:40px;
 }
-.read{
-  float:right;
-  background: #fd8a61;
-  color:white;
-  font-size: 12px;
-  cursor:pointer;
-  padding:5px 10px;
-  margin-top:80px;
-  margin-right:60px;
-}
 .an_l_foot{
   width:680px;
   background-color: rgb(230,230,230);
@@ -199,16 +151,8 @@ a{
 .an_l_foot span{
   padding-right:15px;
 }
-.an_right{
-  float:right;
-  width:250px;
-}
 .more{
   display:none;
-}
-.my_body{
-  height:690px;
-  overflow: hidden;
 }
 .blank{
   margin:10px auto;
@@ -266,7 +210,7 @@ a{
 .review_content{
   border:none;
   padding:20px 0px 0px 10px;
-  width:98%;
+  width:90%;
   resize: none;
   height:80px;
 }
@@ -324,4 +268,96 @@ a{
 }
 .showContent{
   font: 12px "宋体", Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 430px){
+  .an_left{
+    margin: auto;
+    width:98%;
+    background: url("../image/line.jpg") repeat-y  right center ;
+    background-size: 7px;
+  }
+  .an_right{
+    width:98%;
+    margin: auto;
+  }
+  .wrap {
+    display: none;
+    width: 10px;
+  }
+  #container{
+    display: none;
+  }
+  .box{
+    display: none;
+  }
+  .read{
+    float:right;
+    background: #fd8a61;
+    color:white;
+    font-size: 12px;
+    cursor:pointer;
+    padding:5px 10px;
+    margin-right:60px;
+  }
+}
+
+@media screen and (min-width: 430px){
+  .an_left{
+    float:left;
+    width:740px;
+    background: url("../image/line.jpg") repeat-y  right center ;
+    background-size: 7px;
+  }
+  .an_right{
+    float:right;
+    width:250px;
+  }
+  .wrap{
+    position:relative;
+    margin:20px auto ;
+    width:100px;
+    perspective: 900px;
+    min-height:50px;
+    font-size: 15px;
+  }
+  #container{
+    position:absolute;
+    left:90%;
+    margin-left:-102px;
+    height:50px;
+    width:100px;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+    transform:rotateY(0deg)
+  }
+  .box{
+    position:absolute;
+    bottom: 0;
+    width:100px;
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+    font-size:13px;
+    color:white;
+  }
+  .demo1{background-color:blue;transform:rotateY(0deg) translateZ(80px);}
+  .demo2{background-color:green;transform:rotateY(72deg) translateZ(80px)}
+  .demo3{background-color:orange;transform:rotateY(144deg) translateZ(80px)}
+  .demo4{background-color:grey;transform:rotateY(216deg) translateZ(80px)}
+  .demo5{background-color:purple;transform:rotateY(288deg) translateZ(80px)}
+  .my_body{
+    height:690px;
+    overflow: hidden;
+  }
+  .read{
+    float:right;
+    background: #fd8a61;
+    color:white;
+    font-size: 12px;
+    cursor:pointer;
+    padding:5px 10px;
+    margin-top:80px;
+    margin-right:60px;
+  }
 }
