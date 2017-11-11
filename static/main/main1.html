@@ -9,12 +9,35 @@
   <link rel="stylesheet" href="../css3/main.css">
 </head>
 <body>
+  <div id="tilt">
+    <div class="clickNav">
+      <div class="clickNav_s">
+        <a href="main1.html"><img class="navImg" src="../image/1.png"/></a>
+        <br>
+        <span>  首页</span>
+      </div>
+      <div class="clickNav_s">
+        <a href="about.html"><img class="navImg" src="../image/2.png"/></a>
+        <br>
+        <span>首页</span>
+      </div>
+      <div class="clickNav_s">
+        <a href="login.html"><img class="navImg" src="../image/3.png"/></a>
+        <br>
+        <span>首页</span>
+      </div>
+      <div class="closeme">
+        <img style="width:15px;height:15px" src="../image/4.png">
+      </div>
+    </div>
+  </div>
   <div id="all">
     <div id="header">
       <div class="logo">
         <a href="/" >
           <img src="../image/logo2.jpg">
         </a>
+        <div class="my_nav"></div>
       </div>
       <nav class="header_nav">
         <a href="main1.html" class="header_link top_current">
@@ -108,6 +131,18 @@
     </div>
   </div>
   <script src="../js/main.js">
+  </script>
+  <script>
+    var myNav=document.getElementsByClassName("my_nav")[0];
+    var tilt=document.getElementById("tilt");
+    myNav.onclick=function(){
+      tilt.style.display="block";
+    }
+    var closeme=document.getElementsByClassName("closeme")[0];
+    closeme.onclick=function(){
+      console.log("!!");
+      tilt.style.display="none";
+    }
   </script>
 </body>
 </html>

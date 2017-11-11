@@ -1,10 +1,27 @@
 li{
   list-style: none;
 }
-#banner{
-  background: url("../image/banner_top.jpg") no-repeat;
-  background-size: 1300px 230px;
-  height:265px;
+@media screen and (max-width:430px){
+  #banner{
+    display:none;
+  }
+  #anticle{
+    width:100%;
+    margin:10px auto;
+    overflow: hidden;
+  }
+}
+@media screen and (min-width:430px){
+  #banner{
+    background: url("../image/banner_top.jpg") no-repeat;
+    background-size: 1300px 230px;
+    height:265px;
+  }
+  #anticle{
+    width:1000px;
+    margin:20px auto;
+    overflow: hidden;
+  }
 }
 .banner_all{
   width:1000px;
@@ -103,11 +120,6 @@ a{
   color:purple;
   font-size: 13px;
   margin-bottom: 10px;
-}
-#anticle{
-  width:1000px;
-  margin:20px auto;
-  overflow: hidden;
 }
 .an_title{
   width：1000px;
