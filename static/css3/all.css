@@ -34,7 +34,7 @@ a{
     margin-left:-20px;
   }
   .logo a img{
-    width:100px;
+    width:200px;
     height:40px;
     margin-left:25px;
     margin-top:5px;
@@ -74,6 +74,16 @@ a{
     top:5px;
     cursor: pointer;
   }
+  .r_content{
+    padding:10px;
+    width: 95%;
+  }
+  .search{
+    display: none;
+  }
+  .logo a iframe{
+    display: none;
+  }
   .slogan{
     display:none;
   }
@@ -107,9 +117,20 @@ a{
     height:60px;
     margin-top:10px;
   }
+  .r_content{
+    float:left;
+    padding:10px;
+    width:200px;
+  }
+  .search input{
+    width:120px;
+  }
+  .search button{
+    display:inline-block;
+    width:60px;
+  }
   .logo a img{
-    width:300px;
-    height:60px;
+    display: none;
   }
   #myanticle{
     width:1000px;
@@ -174,26 +195,8 @@ a{
   background-color: lightBlue;
   border-radius: 5px;
 }
-@media screen and (max-width: 430px){
-  .r_content{
-    padding:10px;
-    width: 95%;
-  }
-  .search{
-    display: none;
-  }
-}
-@media screen and (min-width: 430ox){
-  .r_content{
-    float:left;
-    padding:10px;
-    width:200px;
-  }
-  .search input{
-    width:120px;
-  }
-  .search button{
-    display:inline-block;
-    width:60px;
-  }
+.logo a iframe{
+  margin-top:-10px;
+  width:500px;
+  height:100px;
 }
