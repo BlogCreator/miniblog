@@ -7,7 +7,7 @@ btn.onclick=function(){
     console.log(json.success);
     if(json.success=="true"){
       var login=document.getElementsByClassName("login")[0];
-      login.style.marginTop="-160px";
+      login.style.marginTop="-220px";
       var sub=document.getElementsByClassName("sub")[0];
       sub.innerHTML='\
         <form action="/interface/publish_article" method="post" enctype="multipart/form-data">\

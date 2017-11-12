@@ -49,14 +49,15 @@ function getContent(json){
   if(count==0){myBody.innerHTML="对不起你搜索的标题不存在"}
   for(var i=0;i<count;i++){
     myBody.innerHTML+=bu;
-    var title=document.getElementsByClassName("an_l_title")[i].getElementsByTagName("h3")[0];
-    //加载文章目录
     titleIndex1.innerHTML+='<li><a></a></li>';
-    titleIndex1.getElementsByTagName("a")[i].href="/interface/article/"+title;
+    var title=document.getElementsByClassName("an_l_title")[i].getElementsByTagName("h3")[0];
+    title.innerHTML=json[i].title;
+    //加载文章目录
+    //console.log(title.innerText);
+    titleIndex1.getElementsByTagName("a")[i].href="/interface/article/"+title.innerText;
     var titleText=titleIndex1.getElementsByTagName("a")[i];
     titleText.innerText=json[i].title;
     //加载标题,图片,描述,日期
-    title.innerHTML=json[i].title;
     var img=document.getElementsByClassName("an_l_body")[i].getElementsByTagName("img")[0];
     img.src="/"+json[i].pic;
     var desc=document.getElementsByClassName("content")[i];
@@ -254,7 +255,8 @@ hello.prototype={
   //点击评论
   myreview:function(name,title,value){
     if(name==""){
-      name="匿名";
+      alert("请留下您的姓名");
+      return false;
     }
     var self=this;
     myAjax("post","/interface/comment","application/x-www-form-urlencoded","name="+name+"&title="+title+"&content="+value,function(cl){
@@ -308,6 +310,7 @@ hello.prototype={
         console.log(title);
         var value=document.getElementsByTagName("textarea")[0].value;
         var name=document.getElementsByClassName("review_name")[0].getElementsByTagName("input")[0].value;
+        console.log(name);
         self.myreview(name,title,value);
       }
     });
