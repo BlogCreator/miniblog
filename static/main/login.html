@@ -6,11 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>登录</title>
   <style>
+  @media screen and (max-width:430px){
+    .all{
+      width:80%;
+      margin:20px auto;
+      text-align: center;
+    }
+    .sub{
+      width:80%;
+      margin:20px auto;
+      text-align: center;
+    }
+  }
+  @media screen and (min-width:430px){
     .all{
       width:800px;
       margin:20px auto;
       text-align: center;
     }
+    .sub{
+      width:800px;
+      margin:20px auto;
+      text-align: center;
+    }
+  }
     input{
       padding:5px;
       margin-bottom: 10px;
@@ -41,16 +60,15 @@
       color:white;
       cursor: pointer;
     }
-    .sub{
-      width:800px;
-      margin:20px auto;
-      text-align: center;
-    }
+
     .login{
       transition: all 1.5s ease-in-out;
     }
     .sub{
       transition: all 1.5s ease-in-out;
+    }
+    .attention{
+      text-align: center;
     }
   </style>
 </head>
@@ -75,6 +93,9 @@
     </div>
     <div class="sub">
     </div>
+  </div>
+  <div class="attention">
+    <span style="color:red">请注意,此页面只有需要权限才可访问可以访问</span>
   </div>
 </body>
 <script src="../js/login.js"></script>

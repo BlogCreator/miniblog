@@ -18,6 +18,7 @@ a{
   .my_nav{
     float:right;
     margin-top:10px;
+    margin-right:10px;
     width:25px;
     height:5px;
     color:red;
@@ -53,6 +54,7 @@ a{
     width:100%;
     margin:auto;
     overflow: hidden;
+    line-height: 20px;
   }
   .clickNav_s{
     float:left;
@@ -71,6 +73,9 @@ a{
     right:20px;
     top:5px;
     cursor: pointer;
+  }
+  .slogan{
+    display:none;
   }
 }
 @media screen and (min-width:431px){
@@ -106,6 +111,13 @@ a{
     width:300px;
     height:60px;
   }
+  #myanticle{
+    width:1000px;
+    margin:auto;
+  }
+  .slogan{
+    border-bottom: 1px solid rgb(233,233,233);
+  }
 }
 .header_link{
   display:inline-block;
@@ -133,13 +145,6 @@ a{
 }
 .top_current{
   color:green;
-}
-#myanticle{
-  width:100%;
-  margin:auto;
-}
-.slogan{
-  border-bottom: 1px solid rgb(233,233,233);
 }
 .slogan p{
   padding:7px;

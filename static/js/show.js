@@ -219,7 +219,8 @@ hello.prototype={
   //点击评论
   myreview:function(name,title,value){
     if(name==""){
-      name="匿名";
+      alert("留下您的姓名再评论吧");
+      return ;
     }
     var self=this;
     myAjax("post","/interface/comment","application/x-www-form-urlencoded","name="+name+"&title="+title+"&content="+value,function(cl){

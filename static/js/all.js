@@ -10,5 +10,13 @@ for(var i=0;i<headLink.length;i++)
     }
   })(i);
 }
-用原生js写过的几个小游戏，存储在我的github中
-写过自己的个人博客，前端页面用html，css，原生js写的，服务器用nodejs搭建的，包含一些个人的学习生活经历
+var myNav=document.getElementsByClassName("my_nav")[0];
+var tilt=document.getElementById("tilt");
+myNav.onclick=function(){
+  tilt.style.display="block";
+}
+var closeme=document.getElementsByClassName("closeme")[0];
+closeme.onclick=function(){
+  console.log("!!");
+  tilt.style.display="none";
+}

@@ -35,28 +35,20 @@
     <div id="header">
       <div class="logo">
         <a href="/" >
-          <img src="../image/logo2.png">
+          <img src="/static/image/logo2.png">
         </a>
         <div class="my_nav"></div>
       </div>
       <nav class="header_nav">
-        <a href="main1.html" class="header_link top_current">
+        <a href="/static/main/main1.html" class="header_link top_current">
           <span>首页</span>
           <span>Protal</span>
         </a>
-        <a href="about.html" class="header_link">
+        <a href="/static/main/about.html" class="header_link">
           <span>关于我</span>
           <span>About</span>
         </a>
-        <a href="life.html" class="header_link">
-          <span>生活闲谈</span>
-          <span>Study</span>
-        </a>
-        <a href="" class="header_link">
-          <span>学习生涯</span>
-          <span>Life</span>
-        </a>
-        <a href="login.html" class="header_link">
+        <a href="/static/main/login.html" class="header_link">
           <span>登录</span>
           <span>sign in</span>
         </a>
@@ -70,7 +62,7 @@
           <p>时间的，长河每天</p>
         </div>
         <div class="myInfor">
-          <a href="">
+          <a href="/static/main/about.html">
             <span class="name"></a>
           </a>
         </div>
@@ -132,22 +124,9 @@
   </div>
   <script src="../js/main.js"></script>
   <script src="/static/js/getInfo.js"></script>
+  <script src="/static/js/all.js"></script>
   <script>
-    var myNav=document.getElementsByClassName("my_nav")[0];
-    var tilt=document.getElementById("tilt");
-    myNav.onclick=function(){
-      tilt.style.display="block";
-    }
-    var closeme=document.getElementsByClassName("closeme")[0];
-    closeme.onclick=function(){
-      console.log("!!");
-      tilt.style.display="none";
-    }
-
-    //author: syk
-    //date:2017-11-12
-
-    getInfo_global.__proto__.callback = function(r){
+      getInfo_global.__proto__.callback = function(r){
       document.getElementsByClassName('myInfor')[0].firstElementChild.
         firstElementChild.innerText = r.result.name;
       document.getElementsByClassName('demo1')[0].innerText = r.result.name;

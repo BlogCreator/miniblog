@@ -1,29 +1,52 @@
+@media screen and (max-width:430px){
+  .justme{
+    width:80%;
+    padding-right:15px;
+    margin-left:10%;
+    margin-top: 20px;
+    float:left;
+  }
+  .personInfor{
+    float:left;
+    margin-top: 20px;
+    margin-left: 5.5%;
+    padding:20px;
+    font: 12px "宋体", Arial, Helvetica, sans-serif;
+    color:rgb(180,180,180);
+  }
+  .justme h2{
+    margin: 20px 0;
+    color:grey;
+    font-size: 20px;
+  }
+}
+@media screen and (min-width:430px){
+  .justme{
+    width:80%;
+    padding-right:15px;
+    margin-top: 20px;
+    float:left;
+    background: url("../image/line.jpg") repeat-y right;
+    background-size: 8px;
+  }
+  .personInfor{
+    float:left;
+    margin-top: 68px;
+    padding:20px;
+    font: 12px "宋体", Arial, Helvetica, sans-serif;
+    color:rgb(180,180,180);
+  }
+  .justme h2{
+    margin: 20px 0;
+    color:grey;
+    font-size: 20px;
+  }
+}
 .top_current{
   color:green;
-}
-.justme{
-  width:80%;
-  margin-left:10%;
-  margin-top: 20px;
-  float:left; 
-  background: url("../image/line.jpg") repeat-y right;
-
-  background-size: 8px;
-}
-.justme h2{
-  margin: 20px 0;
-  color:grey;
-  font-size: 20px;
 }
 .justme p{
   font: 12px "宋体", Arial, Helvetica, sans-serif;
   color:#696969;
   line-height: 22px;
-}
-.personInfor{
-  float:left;
-  margin-top: 20px;
-  padding:20px;
-  font: 12px "宋体", Arial, Helvetica, sans-serif;
-  color:rgb(180,180,180);
 }

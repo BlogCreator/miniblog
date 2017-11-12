@@ -15,25 +15,18 @@
         <a href="/" >
           <img src="/static/image/logo2.png">
         </a>
+        <div class="my_nav"></div>
       </div>
       <nav class="header_nav">
-        <a href="main1.html" class="header_link top_current">
+        <a href="/static/main/main1.html" class="header_link top_current">
           <span>首页</span>
           <span>Protal</span>
         </a>
-        <a href="about.html" class="header_link">
+        <a href="/static/main/about.html" class="header_link">
           <span>关于我</span>
           <span>About</span>
         </a>
-        <a href="life.html" class="header_link">
-          <span>生活闲谈</span>
-          <span>Study</span>
-        </a>
-        <a href="" class="header_link">
-          <span>学习生涯</span>
-          <span>Life</span>
-        </a>
-        <a href="login.html" class="header_link">
+        <a href="/static/main/login.html" class="header_link">
           <span>登录</span>
           <span>sign in</span>
         </a>
@@ -81,7 +74,7 @@
             <span>今日访客:<i class="vis">    2</i></span>
           </div>
           <div class="search">
-            <input type="text"/>
+            <input style="width:100px" type="text"/>
             <button>search</button>
           </div>
           <div class="s_content">
@@ -110,6 +103,7 @@
   </div>
   <script src="/static/js/show.js"></script>
   <script src="/static/js/getInfo.js"></script>
+  <script src="/static/js/all.js"></script>
   <script>
       getInfo_global.__proto__.callback = function(r){
       document.getElementsByClassName('myInfor')[0].firstElementChild.
