@@ -46,7 +46,6 @@ function getContent(json){
   var count=json.length;
   var titleIndex1=document.getElementsByClassName("title_index1")[0];
   titleIndex1.innerHTML="";
-  console.log(count);
   if(count==0){myBody.innerHTML="对不起你搜索的标题不存在"}
   for(var i=0;i<count;i++){
     myBody.innerHTML+=bu;
