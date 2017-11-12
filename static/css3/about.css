@@ -1,16 +1,11 @@
 .top_current{
   color:green;
 }
-.aboutme{
-  width:1000px;
-  margin:auto;
-  overflow: hidden;
-}
 .justme{
+  width:80%;
+  margin-left:10%;
   margin-top: 20px;
-  padding:0 20px;
-  float:left;
-  width:700px;
+  float:left; 
   background: url("../image/line.jpg") repeat-y right;
 
   background-size: 8px;

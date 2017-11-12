@@ -133,6 +133,7 @@ a{
 }
 .an_l_body .content{
   float:left;
+  width: 30%;
   padding:15px;
   color:#756F71;
   font-size: 15px;
@@ -298,7 +299,7 @@ a{
     font-size: 12px;
     cursor:pointer;
     padding:5px 10px;
-    margin-right:60px;
+    margin-right:20px;
   }
 }
 
