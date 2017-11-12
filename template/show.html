@@ -48,7 +48,7 @@
         </div>
         <div class="myInfor">
           <a href="">
-            <span class="name">曹明雷</span>
+            <span class="name"></span>
           </a>
         </div>
       </div>
@@ -67,11 +67,11 @@
         <div class="r_content">
           <div class="wrap">
             <div id="container" style="transform:rotateY(0deg)">
-              <div class="box demo1" style="transform:rotateY(0deg) translateZ(80px)"><b><a>曹明雷</a></b></div>
-              <div class="box demo2" style="transform:rotateY(72deg) translateZ(80px)"><b><a>1996-07-04</a></b></div>
-              <div class="box demo3" style="transform:rotateY(144deg) translateZ(80px)"><b><a>哈尔滨理工大学</a></b></div>
-              <div class="box demo4" style="transform:rotateY(216deg) translateZ(80px)"><b><a>学生</a></b></div>
-              <div class="box demo5" style="transform:rotateY(288deg) translateZ(80px)"><b><a>我的博客</a></b></div>
+              <div class="box demo1" style="transform:rotateY(0deg) translateZ(80px)"><b><a></a></b></div>
+              <div class="box demo2" style="transform:rotateY(72deg) translateZ(80px)"><b><a></a></b></div>
+              <div class="box demo3" style="transform:rotateY(144deg) translateZ(80px)"><b><a></a></b></div>
+              <div class="box demo4" style="transform:rotateY(216deg) translateZ(80px)"><b><a></a></b></div>
+              <div class="box demo5" style="transform:rotateY(288deg) translateZ(80px)"><b><a></a></b></div>
             </div>
           </div>
           <!--<div class="des_resolve">我的摩天轮</div>-->
@@ -108,7 +108,17 @@
       </div>
     </div>
   </div>
-  <script src="/static/js/show.js">
+  <script src="/static/js/show.js"></script>
+  <script src="/static/js/getInfo.js"></script>
+  <script>
+      getInfo_global.__proto__.callback = function(r){
+      document.getElementsByClassName('myInfor')[0].firstElementChild.
+        firstElementChild.innerText = r.result.name;
+      document.getElementsByClassName('demo1')[0].innerText = r.result.name;
+      document.getElementsByClassName('demo2')[0].innerText = r.result.birthday;
+      document.getElementsByClassName('demo3')[0].innerText = r.result.school;
+      document.getElementsByClassName('demo4')[0].innerText = r.result.name;
+    }
   </script>
 </body>
 </html>
