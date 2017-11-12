@@ -72,6 +72,16 @@ a{
   }
 }
 @media screen and (min-width:431px){
+  #tilt{
+    position:absolute;
+    z-index:3;
+    left:0;
+    top:0;
+    width:100%;
+    height:80px;
+    background-color: white;
+    display:none;
+  }
   #header{
     width:1000px;
     height:80px;

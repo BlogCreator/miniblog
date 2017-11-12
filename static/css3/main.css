@@ -324,12 +324,11 @@ a{
   #container{
     position:absolute;
     left:90%;
-    margin-left:-102px;
+    margin-left:-120px;
     height:50px;
     width:100px;
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
-    transform:rotateY(0deg)
   }
   .box{
     position:absolute;

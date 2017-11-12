@@ -52,7 +52,8 @@ function getContent(json){
     myBody.innerHTML+=bu;
     var title=document.getElementsByClassName("an_l_title")[i].getElementsByTagName("h3")[0];
     //加载文章目录
-    titleIndex1.innerHTML+='<li><a href="#"></a></li>';
+    titleIndex1.innerHTML+='<li><a></a></li>';
+    titleIndex1.getElementsByTagName("a")[i].href="/interface/article/"+title;
     var titleText=titleIndex1.getElementsByTagName("a")[i];
     titleText.innerText=json[i].title;
     //加载标题,图片,描述,日期
@@ -161,6 +162,7 @@ hello.prototype={
       for(var i=0;i<length;i++){
       var titleIndex=document.getElementsByClassName("title_index")[0].getElementsByTagName("li");
       titleIndex[i].getElementsByTagName("a")[0].innerText=cl[i].title;
+      titleIndex[i].getElementsByTagName("a")[0].href="/interface/article/"+cl[i].title;
       titleIndex[i].getElementsByTagName("i")[0].innerText=cl[i].click;
       }
     })
