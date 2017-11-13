@@ -7,10 +7,10 @@ btn.onclick=function(){
     console.log(json.success);
     if(json.success=="true"){
       var login=document.getElementsByClassName("login")[0];
-      login.style.marginTop="-220px";
+      login.style.marginTop="-150px";
       var sub=document.getElementsByClassName("sub")[0];
       sub.innerHTML='\
-        <form action="/interface/publish_article" method="post" enctype="multipart/form-data">\
+        <form class="myForm" action="/interface/publish_article" method="post" enctype="multipart/form-data">\
           <div>\
             <label>标题</label>\
             <input type="text" name="title">\
@@ -21,7 +21,7 @@ btn.onclick=function(){
           </div>\
           <div>\
             <label>类别</label>\
-            <input type="text" name="cls">\
+            <input class="myCls" type="text" name="cls">\
           </div>\
           <div>\
             <label>文件</label>\
@@ -33,9 +33,14 @@ btn.onclick=function(){
           </div>\
           <div>\
             <label></label>\
-            <input type="submit" id="submit" class="btn" value="发布">\
+            <input type="button" id="sub" class="btn" value="发布">\
           </div>\
         </form>'
+        var sub=document.getElementById("sub");
+        sub.onclick=function(){
+          var va=document.getElementsByClassName("myCls")[0].value;
+          checkCls(va);
+        }
     }
     else{
       var error=document.getElementsByClassName("error")[0];
@@ -47,4 +52,38 @@ btn.onclick=function(){
   var password=document.getElementsByClassName("passWord")[0].value;
   xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   xml.send("username="+username+"&password="+password);
+}
+function checkCls(value){
+   var flag=false;
+   var myForm=document.getElementsByClassName("myForm")[0];
+   var xmlh=new XMLHttpRequest();
+   xmlh.onreadystatechange=function(){
+     if(xmlh.readyState==4&&xmlh.status==200){
+       var cl=JSON.parse(xmlh.responseText).result;
+       console.log(value);
+       for(var i=0;i<cl.length;i++){
+         if(cl[i]==value){
+           flag=true;
+         }
+       }
+       if(flag==false){
+         addCls(value);
+       }
+       else{
+         myForm.submit();
+       }
+     }
+   }
+   xmlh.open("post","/interface/get_cls");
+   xmlh.send();
+}
+function addCls(value){
+    var myForm=document.getElementsByClassName("myForm")[0];
+    var xmlh=new XMLHttpRequest();
+    xmlh.onreadystatechange=function(){
+      myForm.submit();
+    }
+    xmlh.open("post","/interface/create_cls");
+    xmlh.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlh.send("cls="+value);
 }

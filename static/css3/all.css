@@ -186,6 +186,7 @@ a{
   padding:5px;
   background:url("../image/bg.jpeg");
   border-radius: 5px;
+  margin-bottom: 5px;
 }
 .s_content2{
   float:left;
@@ -194,6 +195,7 @@ a{
   padding:5px;
   background-color: lightBlue;
   border-radius: 5px;
+  margin-bottom: 5px;
 }
 .logo a iframe{
   margin-top:-10px;

@@ -141,6 +141,7 @@ hello.prototype={
       var length=cl.result.length;
       var cl=cl.result;
       for(var i=0;i<length;i++){
+      document.getElementsByClassName("title_index")[0].innerHTML+='<li><a href="#">1</a><span>点击量:<i style="color:red"></i></span></li>'
       var titleIndex=document.getElementsByClassName("title_index")[0].getElementsByTagName("li");
       titleIndex[i].getElementsByTagName("a")[0].innerText=cl[i].title;
       titleIndex[i].getElementsByTagName("i")[0].innerText=cl[i].click;
@@ -242,11 +243,13 @@ hello.prototype={
       var allReview=document.getElementsByClassName("allReview")[0];
       allReview.innerHTML="";
       var result=cl.result;
+      var length=result.length;
       var reviewNumber=document.getElementsByClassName("review_number")[0].getElementsByTagName("i")[0];
       console.log(reviewNumber.innerText);
-      reviewNumber.innerText=result.length;
-      console.log(result.length);
-      for(var i=0;i<result.length;i++){
+      reviewNumber.innerText=length;
+      console.log(length);
+      //设置两个for,使评论功能可以按时间顺序排列
+      for(var i=0;i<length;i++){
         allReview.innerHTML+='<div class="showReview">\
           <span class="reviewName"></span>\
           <span class="reviewTime"></span>\
@@ -254,12 +257,14 @@ hello.prototype={
           <br>\
           <span class="showContent"></span>\
         </div>'
+      }
+      for(var i=length-1;i>=0;i--){
         var name=result[i].name;
         var content=result[i].content;
         var date=result[i].date[0]+"-"+result[i].date[1]+"-"+result[i].date[2];
-        var na=document.getElementsByClassName("reviewName")[i];
-        var ti=document.getElementsByClassName("reviewTime")[i];
-        var showContent=document.getElementsByClassName("showContent")[i];
+        var na=document.getElementsByClassName("reviewName")[length-1-i];
+        var ti=document.getElementsByClassName("reviewTime")[length-1-i];
+        var showContent=document.getElementsByClassName("showContent")[length-1-i];
         na.innerText=name;
         ti.innerText=date;
         showContent.innerText=content;
