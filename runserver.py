@@ -141,8 +141,24 @@ def server(args=None, Application=bobo.Application):
     run_server(app, options.port)
 
 if __name__ == '__main__':
-    default_args = [sys.argv[0], '-f', 'blog.py', '-s', '/static=static']
-    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
-    if len(sys.argv) == 1:
-        sys.argv = default_args
-    sys.exit(server(Application = MyApplication))
+    # default_args = [sys.argv[0], '-f', 'blog.py', '-s', '/static=static']
+    # sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    # if len(sys.argv) == 1:
+    #     sys.argv = default_args
+    # sys.exit(server(Application = MyApplication))
+
+    # import os
+    # import sys
+    # module_path = os.path.sep.join(os.path.dirname(os.path.abspath(__file__)).split(os.path.sep)[:-1])
+    # sys.path.append(module_path)
+    # from miniblog.core import MyApplication
+
+    module = types.ModuleType("miniblog")
+    module.__file__ = "blog.py"
+    six.exec_(compile(open(module.__file__).read(),
+                      module.__file__, 'exec'),
+              module.__dict__)
+    sys.modules[module.__name__] = module
+    source = ["miniblog","boboserver:static('/static','static')"]
+    application = MyApplication(bobo_resources="\n".join(source))
+    run_server(application, 8080)
