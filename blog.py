@@ -58,6 +58,13 @@ def login(bobo_request,username,password):
         else:
             return '{"success":"false","msg":"session_id is null"}'
     else:
+        if len(meta)==0 and username=='admin' and password=='123456':
+            if 'session_id' in bobo_request.cookies:
+                global ADMIN_SESSIONID
+                ADMIN_SESSIONID.add(bobo_request.cookies['session_id'])
+                return '{"success":"true","msg":"please change your authentication!!!!!!"}'
+            else:
+                return '{"success":"false","msg":"session_id is null"}'
         return '{"success":"false","msg":"username or password error"}'
 
 @bobo.query('/interface/get_article')
@@ -106,6 +113,9 @@ def create_cls(cls):
     meta = db.table(name='meta')
     if len(meta.all()) == 0:
         meta.insert({"key":"meta","cls":[]})
+    elif 'cls' not in meta.all()[0]:
+        meta.update({'cls':[]},tinydb.Query().key=='meta')
+
     origin = meta.all()[0]
     if cls not in origin['cls']:
         origin['cls'].append(cls)
@@ -260,6 +270,3 @@ def show_article(title):
             html = html[:m.span()[0]] + article[0]['content']+\
                 html[m.span()[1]:]
         return html
-
-
-
