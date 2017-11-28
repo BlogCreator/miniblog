@@ -302,9 +302,7 @@ hello.prototype={
         showContent.innerText=content;
       }
       var btn=document.getElementsByClassName("re_btn")[0];
-      /*不可以跟getReivew函数并列　否则只能在没有评论时评论　有评论时不触发onclick函数
-      　应该是异步的问题 ,现在对这部分差点儿理解
-      */
+      /*不可以跟getReivew函数并列　否则只能在没有评论时评论　有评论时不触发onclick函数*/
       btn.onclick=function(event){
         console.log("!!");
         event.stopPropagation();

@@ -3,15 +3,15 @@ class ajax{
     send(kargs){
         var _default = {method:'get'}
         var xhr = new XMLHttpRequest();
-        
+
         if(kargs.method)
             xhr.open(kargs.method,kargs.url);
         else xhr.open(_default.method,'/');
 
         for(var k in kargs.head){
-            xhr.setRequestHeader(k, header.k);
+            xhr.setRequestHeader(k, head.k);
         }
-        
+
         if(kargs.body)
             xhr.send(body);
         else xhr.send('');
