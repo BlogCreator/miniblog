@@ -160,6 +160,7 @@ hello.prototype={
       var length=cl.result.length;
       var cl=cl.result;
       for(var i=0;i<length;i++){
+      document.getElementsByClassName("title_index")[0].innerHTML+='<li><a href="#">1</a><span>点击量:<i style="color:red"></i></span></li>'
       var titleIndex=document.getElementsByClassName("title_index")[0].getElementsByTagName("li");
       titleIndex[i].getElementsByTagName("a")[0].innerText=cl[i].title;
       titleIndex[i].getElementsByTagName("a")[0].href="/interface/article/"+cl[i].title;
