@@ -23,6 +23,10 @@ md = markdown.Markdown(extensions=[
     smarty.makeExtension(),
 ])
 ADMIN_SESSIONID = set()
+
+print(cdr)
+print(UPLOAD)
+
 def authentication(instance,request, decorated):
     if request.cookies['session_id'] not in ADMIN_SESSIONID:
         resp = bobo.webob.Response()
@@ -32,6 +36,7 @@ def authentication(instance,request, decorated):
 def wrap_article_result(db_result,convert=md.convert):
     if hasattr(db_result, '__getitem__'):
         for i in db_result:
+            i['pic']='static/upload/pic/'+i['pic'].lstrip(UPLOAD)
             try:
                 with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
                     i['content'] = convert(file.read())
@@ -263,7 +268,7 @@ def show_article(title):
         return bobo.redirect('/')
     else:
         html = ''
-        with open('./template/show.html','r') as show:
+        with open(cdr+'/template/show.html','r',encoding='utf-8') as show:
             html = show.read()
             m = re.search('{article_my}',html)
             wrap_article_result(article)

@@ -177,8 +177,10 @@ hello.prototype={
           r[s].onclick=function(){
           //event.stopPropagation();
           var title=document.getElementsByClassName("an_l_title")[s].getElementsByTagName("h3")[0].innerText;
-          window.open("/interface/article/"+title);
+          console.log(title);
+          //需要先增加点击量再跳转
           self.addClick(title);
+          window.open("/interface/article/"+title);
           myBody.innerHTML="";
           myAjax("post","/interface/get_article","application/x-www-form-urlencoded","title="+title,function(cl){
             var cl=cl.result;
