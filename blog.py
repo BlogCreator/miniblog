@@ -1,4 +1,5 @@
 #! /usr/bin/python3
+import setting
 from setting import *
 import re
 import bobo
