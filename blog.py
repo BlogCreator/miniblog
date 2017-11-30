@@ -1,4 +1,5 @@
 #! /usr/bin/python3
+# coding=ascii
 import setting
 from setting import *
 import re
@@ -6,23 +7,7 @@ import bobo
 import tinydb
 import datetime
 import json
-import markdown
-from markdown.extensions import smart_strong
-from markdown.extensions import footnotes
-from markdown.extensions import fenced_code
-from markdown.extensions import toc
-from markdown.extensions import tables
-from markdown.extensions import def_list
-from markdown.extensions import smarty
-md = markdown.Markdown(extensions=[
-    smart_strong.makeExtension(),
-    footnotes.makeExtension(),
-    fenced_code.makeExtension(),
-    toc.makeExtension(),
-    tables.makeExtension(),
-    def_list.makeExtension(),
-    smarty.makeExtension(),
-])
+from md import md
 ADMIN_SESSIONID = set()
 
 print(cdr)
@@ -40,7 +25,7 @@ def wrap_article_result(db_result,convert=md.convert):
             i['pic']='static/upload/pic/'+i['pic'].lstrip(UPLOAD)
             try:
                 with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
-                    i['content'] = convert(file.read())
+                    i['content'] = "<link rel=stylesheet href='/static/css3/mdstyle.css'></link>"+convert(file.read())
             except:
                 i['content'] = "an error was occurred while reading the file"
 
@@ -148,6 +133,7 @@ def del_cls(cls):
 def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
 
     if hasattr(file,'file') and hasattr(file,'filename'):
+        print(file.filename)
         with open(UPLOAD + file.filename,'wb') as new_file:
             new_file.write(file.file.read())
     if hasattr(pic,'file') and hasattr(pic,'filename'):
