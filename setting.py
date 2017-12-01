@@ -9,3 +9,7 @@ db = tinydb.TinyDB(DB_PATH)
 MIDDLEWARE=[
     middleware.session_id,
 ]
+os.umask(000)
+if not os.path.exists(cdr + '/static/upload'):
+    os.mkdir(cdr + '/static/upload')
+    os.mkdir(cdr + '/static/upload/pic')
