@@ -22,6 +22,8 @@ def authentication(instance,request, decorated):
 def wrap_article_result(db_result,convert=md.convert):
     if hasattr(db_result, '__getitem__'):
         for i in db_result:
+            if 'info' in db.table('meta').all()[0]:
+                i['author'] = db.table('meta').all()[0]['info']['name']
             i['pic']='static/upload/pic/'+i['pic'].lstrip(UPLOAD)
             try:
                 with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
@@ -40,6 +42,7 @@ def index(bobo_request):
 def login(bobo_request,username,password):
     meta = db.table("meta").all()
     if len(meta) != 0 and \
+        'login' in meta[0] and \
         username==meta[0]['login']['username'] and \
         password==meta[0]['login']['password'] :
         if 'session_id' in bobo_request.cookies:
@@ -49,7 +52,7 @@ def login(bobo_request,username,password):
         else:
             return '{"success":"false","msg":"session_id is null"}'
     else:
-        if len(meta)==0 and username=='admin' and password=='123456':
+        if username=='admin' and password=='123456':
             if 'session_id' in bobo_request.cookies:
                 global ADMIN_SESSIONID
                 ADMIN_SESSIONID.add(bobo_request.cookies['session_id'])

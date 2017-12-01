@@ -19,7 +19,7 @@ var bu='<div class="bodyAll">\
 <div class="an_l_foot">\
   <p>\
     时间:<span></span>\
-    作者:<span>cml</span>\
+    作者:<span></span>\
     个人博客:<span></span>\
   </p>\
 </div>\
@@ -65,6 +65,7 @@ function getContent(json){
     desc.innerHTML=content;
     var foot=document.getElementsByClassName("an_l_foot")[i].getElementsByTagName("span");
     foot[0].innerHTML=json[i].date[0]+"-"+json[i].date[1]+"-"+json[i].date[2];
+    foot[1].innerHTML=json[i].author;
     foot[2].innerHTML=json[i].cls;
   }
 }
