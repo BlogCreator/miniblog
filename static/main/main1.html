@@ -133,7 +133,18 @@
       document.getElementsByClassName('demo2')[0].innerText = r.result.birthday;
       document.getElementsByClassName('demo3')[0].innerText = r.result.school;
       document.getElementsByClassName('demo4')[0].innerText = r.result.name;
-    }
+      }
+      //需要先加载成功才监听
+      var me=new hello();
+      me.getClass();
+      me.reveal();
+      me.access();
+      me.rank();
+      me.getLoading();
+      //内部监听
+      window.onload=function(){
+        me.clickSearch();
+      }
   </script>
 </body>
 </html>

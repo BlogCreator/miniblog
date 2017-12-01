@@ -120,7 +120,7 @@
       </div>
     </div>
   </div>
-  <script src="/static/js/show.js"></script>
+  <script src="/static/js/main.js"></script>
   <script src="/static/js/getInfo.js"></script>
   <script src="/static/js/all.js"></script>
   <script>
@@ -131,7 +131,27 @@
       document.getElementsByClassName('demo2')[0].innerText = r.result.birthday;
       document.getElementsByClassName('demo3')[0].innerText = r.result.school;
       document.getElementsByClassName('demo4')[0].innerText = r.result.name;
-    }
+      }
+      //同样创建hello对象的实例
+      var me1=new hello();
+      me1.getLoading=function(){
+          myAjax("post","/interface/get_recent_article","application/x-www-form-urlencoded","limit:5",function(cl){
+              var length=cl.result.length;
+              var cl=cl.result;
+              me1.__proto__.getIndex(cl);
+              me1.__proto__.showornot(length);
+          });
+      }
+      me1.getClass();
+      me1.reveal();
+      me1.access();
+      me1.rank();
+      me1.getLoading();
+      me1.getAllReview();
+      //内部监听
+      window.onload=function(){
+        me1.clickSearch();
+      }
   </script>
 </body>
 </html>
