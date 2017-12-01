@@ -14,7 +14,7 @@ li{
 @media screen and (min-width:430px){
   #banner{
     background: url("../image/banner_top.jpg") no-repeat;
-    background-size: 1300px 230px;
+    background-size: 100% 230px;
     height:265px;
   }
   #anticle{
