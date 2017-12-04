@@ -9,7 +9,6 @@ STATIC = cdr +'/static/'
 UPLOAD = cdr +'/static/upload/'
 
 db = tinydb.TinyDB(DB_PATH)
-sql_db = query.DB(SQLDB_PATH)
 MIDDLEWARE=[
     middleware.session_id,
 ]

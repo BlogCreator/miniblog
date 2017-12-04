@@ -21,7 +21,7 @@ create_click_table ="""
 create_comment_table = """
     create table comment(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        blog_title INTEGER,
+        article_title INTEGER,
         content varchar(255),
         foreign key (blog_title) references blog(title)
     )

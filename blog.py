@@ -68,6 +68,7 @@ def login(bobo_request,username,password):
 
 @bobo.query('/interface/get_article')
 def get_article(title=None,cls=None):
+    sql_db = query.DB(SQLDB_PATH)
     blog = []
     if title:
         blog = sql_db.search("blog",('title',title))
@@ -79,10 +80,12 @@ def get_article(title=None,cls=None):
         d.update(i)
         r.append(d)
     resp = {"success":"true","result":r}
+    sql_db.close()
     return json.dumps(resp)
 
 @bobo.query('/interface/get_recent_article')
 def get_recent_article(limit=100):
+    sql_db = query.DB(SQLDB_PATH)
     if limit == '':
         limit = 100
     blog = sql_db.all("blog")[:int(limit)]
@@ -90,11 +93,13 @@ def get_recent_article(limit=100):
     r = []
     for i in wrap_article_result(blog):
         r.append(i)
+    sql_db.close()
     return json.dumps({"success":"true","result":r})
 
 @bobo.query('/interface/get_click_article')
 def get_click_article(limit=5):
     if limit=='':limit=5
+    sql_db = query.DB(SQLDB_PATH)
     click = sql_db.all("click")[:limit]
     click.sort(key=lambda it:it['number'],reverse=True)
     r = []
@@ -102,15 +107,20 @@ def get_click_article(limit=5):
         d = {}
         d.update(i)
         r.append(d)
+    sql_db.close()
     return json.dumps({"success":"true","result":r})
 @bobo.query('/interface/get_cls')
 def get_cls():
     r = []
+    sql_db = query.DB(SQLDB_PATH)
     try:
         for i in sql_db.all("cls "):
             r.append(i['name'])
+
     except:
+        sql_db.close()
         return json.dumps({"success":"false"})
+    sql_db.close()
     return json.dumps({"success":"true","result":r})
 
 
@@ -119,10 +129,13 @@ def create_cls(cls):
     """
     meta table only has one json object like {"key":"meta","cls":["note"]}
     """
+    sql_db = query.DB(SQLDB_PATH)
     try:
         sql_db.insert("cls",(cls,))
     except:
+        sql_db.close()
         return json.dumps({"success":"false"})
+    sql_db.close()
     return json.dumps({"success":"true"})
 
 @bobo.query('/interface/del_cls', check=authentication)
@@ -130,14 +143,17 @@ def del_cls(cls):
     """
     delete a given class
     """
+    sql_db = query.DB(SQLDB_PATH)
     if len(sql_db.search("blog",("cls",cls)))!=0:
+        sql_db.close()
         return json.dumps({"success":"false","msg":"this class is not null"})
     else: sql_db.delete("cls",("name",cls))
+    sql_db.close()
     return json.jumps({"success":"true"})
 
 @bobo.query('/interface/publish_article',check=authentication)
 def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
-
+    sql_db = query.DB(SQLDB_PATH)
     if hasattr(file,'file') and hasattr(file,'filename'):
         print(file.filename)
         with open(UPLOAD + file.filename,'wb') as new_file:
@@ -153,23 +169,30 @@ def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
                 (title,file.filename,pic.filename,desc,datetime.datetime.now(),cls)
             )
         except sqlite3.OperationalError:
+            sql_db.close()
             return json.dumps({"success":"false","msg":"database write fail!"})
+        sql_db.close()
         return json.dumps({"success":"true"})
     else:
+        sql_db.close()
         return json.dumps({"success":"false","msg":"filename is necessary"})
 
 @bobo.query('/interface/comment')
 def comment(bobo_request, title=None,content=None, name="anonymous"):
+    sql_db = query.DB(SQLDB_PATH)
     if not content or not title:
         return json.dumps({"success":"false","msg":"content and title can not be null"})
     sql_db.insert(
         'comment',
         (title,name,datetime.datetime.now(),content,bobo_request.remote_addr))
+    sql_db.close()
     return json.dumps({"success":"true"})
 
 @bobo.query('/interface/get_comment')
 def get_comment(title=None, limit=None):
+    sql_db = query.DB(SQLDB_PATH)
     if not title:
+        sql_db.close()
         return json.dumps({"success":"false","msg":"we must have a title to get the comments"})
     r = sql_db.search('comment',('article_title',title))
     r = r[:int(limit)] if limit else r
@@ -178,36 +201,45 @@ def get_comment(title=None, limit=None):
         d = {}
         d.update(i)
         result.append(d)
+    sql_db.close()
     return json.dumps({"success":"true","result":result})
 
 @bobo.query('/interface/get_access')
 def get_access(start=None, end=None):
+    sql_db = query.DB(SQLDB_PATH)
     if not start and not end:
         num = len(db.table(name='access').all())
+        sql_db.close()
         return json.dumps({"success":"true","result":num})
     elif not end and start:
         num = len(db.table(name='access')
             .search(tinydb.Query().date==[int(i) for i in start.split('-')]))
+        sql_db.close()
         return json.dumps({"success":"true","result":num})
     elif end and start:
         num = len(db.table(name='access').search(
             (tinydb.Query().date>=[int(i) for i in start.split('-')]) &
             (tinydb.Query().date<=[int(i) for i in end.split('-')])
         ))
+        sql_db.close()
         return json.dumps({"success":"true","result":num})
     else:
+        sql_db.close()
         return json.dumps({"success":"false","msg":"date is not illege"})
 
 @bobo.query('/interface/click')
 def click(title=None):
+    sql_db = query.DB(SQLDB_PATH)
     db_r = sql_db.search('click',('blog_title',title))
     if title:
         if len(db_r) == 0:
             sql_db.insert('click',(title,1))
         else:
             sql_db.update('click',('number',),(db_r[0]['number']+1,),('blog_title',title))
+        sql_db.close()
         return json.dumps({"success":"true"})
     else:
+        sql_db.close()
         return json.dumps({"success":"false","msg":"title can not be null"})
 
 @bobo.query('/interface/set_info',check=authentication)
@@ -245,8 +277,10 @@ def register(username,password):
     return json.dumps({"success":"true"})
 @bobo.query('/interface/article/:title')
 def show_article(title):
+    sql_db = query.DB(SQLDB_PATH)
     article = sql_db.search('blog',('title',title))
     if len(article) == 0:
+        sql_db.close()
         return bobo.redirect('/')
     else:
         html = ''
@@ -255,4 +289,5 @@ def show_article(title):
             m = re.search('{article_my}',html)
             html = html[:m.span()[0]] + next(wrap_article_result(article))['content']+\
                 html[m.span()[1]:]
+        sql_db.close()
         return html
