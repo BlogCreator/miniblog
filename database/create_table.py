@@ -12,18 +12,18 @@ create_blog_table = """
 """
 create_click_table ="""
     create table click(
-        id INTEGER PRIMEAY KEY AUTOINCREMENT,
-        blog_id INTEGER UNIQUE,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        blog_title INTEGER UNIQUE,
         number INTEGER,
-        foreign key(blog_id) references blog(id)
+        foreign key(blog_title) references blog(title)
     );
 """
 create_comment_table = """
     create table comment(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        blog_id INTEGER,
+        blog_title INTEGER,
         content varchar(255),
-        foreign key (blog_id) references blog(id)
+        foreign key (blog_title) references blog(title)
     )
 """
 create_cls_table = """

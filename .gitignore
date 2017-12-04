@@ -3,3 +3,4 @@ __pycache__/
 static/upload/
 database.json
 database/database.db
+test.py

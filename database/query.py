@@ -4,13 +4,13 @@ import os
 class DB:
     insert_disc = {
         "blog":"insert into blog (title,file,pic,desc,date,cls) values(?,?,?,?,?,?)",
-        "access_number":"inert into access_number (blog_id,number) values(?,?)",
+        "click":"insert into click (blog_title,number) values(?,?)",
         "cls":"insert into cls (name) values(?)",
-        "comment":"insert into comment (blog_id,content) values(?,?)",
+        "comment":"insert into comment (article_title,name,date,content,ip) values(?,?,?,?,?)",
     }
     def __init__(self,db):
         self.connect = sqlite3.connect(db)
-
+        self.connect.row_factory = sqlite3.Row
     def insert(self,table,values):
         """
         insert a new column to a table
@@ -49,15 +49,17 @@ class DB:
         :return:
         """
         expr = ""
-        for i,j in zip(column,values):
-            expr += i+'="'+j+'" '
+        for i in column[:-1]:
+            expr += i+"=?,"
+        expr += column[-1]+"=?"
+
         sql = "update %s set %s where %s=?"%(table,expr,match[0])
         print(sql)
-        self.connect.execute(sql,(match[1],))
+        self.connect.execute(sql,(*values,match[1],))
         self.connect.commit()
 
 
-    def search(self,table,match):
+    def search(self,table,match:tuple):
         """
         :param table:
         :param match:
@@ -72,3 +74,6 @@ class DB:
         close the database's connection
         """
         self.connect.close()
+
+    def all(self,table):
+        return self.connect.execute("select * from %s"%table).fetchall()
