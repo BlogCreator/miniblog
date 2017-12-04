@@ -8,11 +8,14 @@ import tinydb
 import datetime
 import json
 import sqlite3
+import traceback
 from md import md
+from database import query
 ADMIN_SESSIONID = set()
 
 print(cdr)
 print(UPLOAD)
+print(SQLDB_PATH)
 
 def authentication(instance,request, decorated):
     if request.cookies['session_id'] not in ADMIN_SESSIONID:
@@ -133,6 +136,7 @@ def create_cls(cls):
     try:
         sql_db.insert("cls",(cls,))
     except:
+        print(traceback.format_exc())
         sql_db.close()
         return json.dumps({"success":"false"})
     sql_db.close()

@@ -3,7 +3,7 @@ import os
 from database import create_table
 
 def create_database():
-    if not os.path.exists(__file__+'/database.db'):
+    if not os.path.exists(os.path.dirname(__file__)+'/database.db'):
         db = sqlite3.connect(os.path.dirname(os.path.abspath(__file__))+"/database.db")
         var = filter(lambda it:not it.startswith('__'),dir(create_table))
         for i in var:

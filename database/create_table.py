@@ -23,7 +23,7 @@ create_comment_table = """
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         article_title INTEGER,
         content varchar(255),
-        foreign key (blog_title) references blog(title)
+        foreign key (article_title) references blog(title)
     )
 """
 create_cls_table = """
