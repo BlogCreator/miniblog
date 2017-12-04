@@ -26,8 +26,9 @@ def wrap_article_result(db_result,convert=md.convert):
             d = {}
             d.update(i)
             d['pic']='static/upload/pic/'+d['pic']
-            if 'info' in db.table('meta') and 'name' in db.table('meta')['info']:
-                d['author'] = db.table('meta')['info']['name']
+            if len(db.table('meta').all())!=0 and 'info' in db.table('meta').all()[0] and \
+                            'name' in db.table('meta').all()[0]['info']:
+                d['author'] = db.table('meta').all()[0]['info']['name']
             try:
                 with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
                     d['content'] = "<link rel=stylesheet href='/static/css3/mdstyle.css'></link>"+convert(file.read())
@@ -73,7 +74,7 @@ def get_article(title=None,cls=None):
     elif cls:
         blog = sql_db.search("blog",('cls',cls))
     r = []
-    for i in blog:
+    for i in wrap_article_result(blog):
         d = {}
         d.update(i)
         r.append(d)
@@ -107,9 +108,7 @@ def get_cls():
     r = []
     try:
         for i in sql_db.all("cls "):
-            d = {}
-            d.update(i)
-            r.append(d)
+            r.append(i['name'])
     except:
         return json.dumps({"success":"false"})
     return json.dumps({"success":"true","result":r})

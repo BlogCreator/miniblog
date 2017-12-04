@@ -1,5 +1,4 @@
-import blog
-import setting
+from database import make_db_file
 if __name__ == '__main__':
-    #print(blog.show_article('test2'))
+    make_db_file.create_database()
 
