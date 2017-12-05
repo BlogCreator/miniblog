@@ -316,5 +316,11 @@ hello.prototype={
         self.myreview(name,title,value);
       }
     });
+  },
+  setName:function(){
+    var fo=document.getElementsByClassName("an_l_foot");
+    console.log(fo.length);
+    console.log(foot[foot.length-1].getElementsByTagName("span")[1]);
+    var la=foot[foot.length-1].getElementsByTagName("span")[1]="孙亚坤";
   }
 }
