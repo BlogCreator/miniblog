@@ -1,11 +1,4 @@
-def generator():
-    request = yield
-    print('pre process')
-    response = yield
-    print('behand process')
-
+from database import make_db_file
 if __name__ == '__main__':
-    gen = generator()
-    next(gen)
-    gen.send('request')
-    gen.send('response')
+    make_db_file.create_database()
+

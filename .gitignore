@@ -2,3 +2,5 @@ __pycache__/
 .idea/
 static/upload/
 database.json
+database/database.db
+test.py
