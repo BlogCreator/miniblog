@@ -17,3 +17,8 @@ if not os.path.exists(cdr + '/static/upload'):
     os.mkdir(cdr + '/static/upload')
     os.mkdir(cdr + '/static/upload/pic')
 make_db_file.create_database()
+
+markdown_css = [
+    "<link rel=stylesheet href='/static/css3/friendly-style.css'\>",
+    "<link rel=stylesheet href='/static/css3/markdown.css'\>",
+]

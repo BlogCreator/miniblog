@@ -11,7 +11,8 @@ extensions = [
     'pymdownx.tilde',
     'pymdownx.emoji',
     'pymdownx.tasklist',
-    'pymdownx.superfences'
+    'pymdownx.superfences',
+    'pymdownx.highlight'
 ]
 
 extension_config = {
@@ -41,12 +42,17 @@ extension_config = {
     },
     "pymdownx.superfences": {
         "highlight_code": True,
-        "custom_fences": "```"
-    }
+    },
+    "pymdownx.highlight": {
+        "use_pygments": True,
+        "pygments_style": "friendly",
+        "guess_lang": True,
+        "linenums": True,
+    },
 }
 md = markdown.Markdown(
     extensions=extensions,
-    extension_config=extension_config,
+    extension_configs=extension_config,
 )
 if __name__=='__main__':
     if len(sys.argv) != 3:

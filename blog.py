@@ -17,11 +17,13 @@ print(cdr)
 print(UPLOAD)
 print(SQLDB_PATH)
 
+
 def authentication(instance,request, decorated):
     if request.cookies['session_id'] not in ADMIN_SESSIONID:
         resp = bobo.webob.Response()
         resp.body = b'{"success":"false","msg":"authentication fail!"}'
         return resp
+
 
 def wrap_article_result(db_result,convert=md.convert):
     if hasattr(db_result, '__getitem__'):
@@ -34,10 +36,12 @@ def wrap_article_result(db_result,convert=md.convert):
                 d['author'] = db.table('meta').all()[0]['info']['name']
             try:
                 with open(UPLOAD+i['file'],'r', encoding='utf-8') as file:
-                    d['content'] = "<link rel=stylesheet href='/static/css3/mdstyle.css'></link>"+convert(file.read())
+                    d['content'] = '\n'.join(markdown_css)+\
+                                   convert(file.read())
             except:
                 d['content'] = "an error was occurred while reading the file"
             yield d
+
 
 @bobo.query('/')
 def index(bobo_request):
@@ -69,6 +73,7 @@ def login(bobo_request,username,password):
                 return '{"success":"false","msg":"session_id is null"}'
         return '{"success":"false","msg":"username or password error"}'
 
+
 @bobo.query('/interface/get_article')
 def get_article(title=None,cls=None):
     sql_db = query.DB(SQLDB_PATH)
@@ -86,6 +91,7 @@ def get_article(title=None,cls=None):
     sql_db.close()
     return json.dumps(resp)
 
+
 @bobo.query('/interface/get_recent_article')
 def get_recent_article(limit=100):
     sql_db = query.DB(SQLDB_PATH)
@@ -98,6 +104,7 @@ def get_recent_article(limit=100):
         r.append(i)
     sql_db.close()
     return json.dumps({"success":"true","result":r})
+
 
 @bobo.query('/interface/get_click_article')
 def get_click_article(limit=5):
@@ -112,6 +119,8 @@ def get_click_article(limit=5):
         r.append(d)
     sql_db.close()
     return json.dumps({"success":"true","result":r})
+
+
 @bobo.query('/interface/get_cls')
 def get_cls():
     r = []
@@ -142,6 +151,7 @@ def create_cls(cls):
     sql_db.close()
     return json.dumps({"success":"true"})
 
+
 @bobo.query('/interface/del_cls', check=authentication)
 def del_cls(cls):
     """
@@ -154,6 +164,7 @@ def del_cls(cls):
     else: sql_db.delete("cls",("name",cls))
     sql_db.close()
     return json.jumps({"success":"true"})
+
 
 @bobo.query('/interface/publish_article',check=authentication)
 def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
@@ -181,6 +192,7 @@ def pulish_article(file=None,title=None,desc=None,cls=None,pic=None):
         sql_db.close()
         return json.dumps({"success":"false","msg":"filename is necessary"})
 
+
 @bobo.query('/interface/comment')
 def comment(bobo_request, title=None,content=None, name="anonymous"):
     sql_db = query.DB(SQLDB_PATH)
@@ -191,6 +203,7 @@ def comment(bobo_request, title=None,content=None, name="anonymous"):
         (title,name,datetime.datetime.now(),content,bobo_request.remote_addr))
     sql_db.close()
     return json.dumps({"success":"true"})
+
 
 @bobo.query('/interface/get_comment')
 def get_comment(title=None, limit=None):
@@ -207,6 +220,7 @@ def get_comment(title=None, limit=None):
         result.append(d)
     sql_db.close()
     return json.dumps({"success":"true","result":result})
+
 
 @bobo.query('/interface/get_access')
 def get_access(start=None, end=None):
@@ -231,6 +245,7 @@ def get_access(start=None, end=None):
         sql_db.close()
         return json.dumps({"success":"false","msg":"date is not illege"})
 
+
 @bobo.query('/interface/click')
 def click(title=None):
     sql_db = query.DB(SQLDB_PATH)
@@ -246,6 +261,7 @@ def click(title=None):
         sql_db.close()
         return json.dumps({"success":"false","msg":"title can not be null"})
 
+
 @bobo.query('/interface/set_info',check=authentication)
 def set_info(name='null', email='null', motto='null',birthday='null',school="null"):
     t = db.table('meta')
@@ -260,6 +276,7 @@ def set_info(name='null', email='null', motto='null',birthday='null',school="nul
 
     return json.dumps({"success":"true"})
 
+
 @bobo.query('/interface/info')
 def info():
     t = db.table('meta')
@@ -268,6 +285,7 @@ def info():
         return json.dumps({"success":"false","msg":"the information is null"})
     else:
         return json.dumps({"success":"true","result":meta[0]["info"]})
+
 
 @bobo.query('/interface/register',check=authentication)
 def register(username,password):
@@ -279,6 +297,8 @@ def register(username,password):
         buf['login'] = {"username":username,"password":password}
         t.update(buf,tinydb.Query().key == 'meta')
     return json.dumps({"success":"true"})
+
+
 @bobo.query('/interface/article/:title')
 def show_article(title):
     sql_db = query.DB(SQLDB_PATH)
